@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { UpdateData } from './update.entity';
+import { UpdateData } from '../database/entities/update.entity';
 
 @Injectable()
 export class UpdateService {

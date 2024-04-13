@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { UpdateModule } from './update/update.module';
-
+import { ViewModule } from './view/view.module';
+import { SummaryModule } from './summary/summary.module';
 @Module({
-  imports: [DatabaseModule, UpdateModule],
+  imports: [DatabaseModule, UpdateModule, ViewModule, SummaryModule],
   controllers: [AppController],
   providers: [AppService],
 })

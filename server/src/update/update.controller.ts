@@ -1,6 +1,6 @@
 import { Controller, Body, Post } from '@nestjs/common';
 import { UpdateService } from './update.service';
-import { UpdateData } from './update.entity';
+import { UpdateData } from '../database/entities/update.entity';
 
 @Controller('api')
 export class UpdateController {
