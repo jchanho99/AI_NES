@@ -2,7 +2,7 @@ import { Controller, Body, Post } from '@nestjs/common';
 import { UpdateService } from './update.service';
 import { UpdateData } from '../database/entities/update.entity';
 
-@Controller('api')
+@Controller('2')
 export class UpdateController {
   constructor(private readonly updateService: UpdateService) {}
 
