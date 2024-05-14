@@ -14,4 +14,8 @@ export class ViewService {
       .select()
       .getMany();
   }
+  async getOptions(option: string): Promise<any> {
+    const articles = await this.updateRepository.findBy({ section: option });
+    return { articles };
+  }
 }
