@@ -15,6 +15,19 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  //Kakao 소셜 로그인
+  async validateUser(userData: any): Promise<any> {
+    // 사용자 데이터베이스에 저장하거나 업데이트
+    return userData;
+  }
+
+  async kakaoLogin(user: any) {
+    const payload = { email: user.email, sub: user.kakaoId };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
+
   //Hash algorithm with Salt and save the user information at the database
   async saveUserInformation(
     id: string,
@@ -41,23 +54,6 @@ export class AuthService {
       .select('u.id') // id 필드만 선택
       .from(User, 'u')
       .where('u.id = :id', { id: id })
-      .getOne();
-    // user가 존재하면 true, 존재하지 않으면 false 반환
-    if (user === null) {
-      console.log(user);
-      return false;
-    } else {
-      console.log(user);
-      return true;
-    }
-  }
-  async nicknameValidCheck(nickname: string): Promise<any> {
-    //database table에서 해당 id가 존재하는지 확인
-    const user = await this.userRepository
-      .createQueryBuilder()
-      .select('u.nickname') // id 필드만 선택
-      .from(User, 'u')
-      .where('u.nickname = :nickname', { nickname: nickname })
       .getOne();
     // user가 존재하면 true, 존재하지 않으면 false 반환
     if (user === null) {
@@ -108,6 +104,5 @@ export class AuthService {
       console.log('거짓반환');
       return false;
     }
-    // return true;
   }
 }

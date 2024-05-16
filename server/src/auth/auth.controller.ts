@@ -1,10 +1,28 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { AuthGuard } from '@nestjs/passport';
 // import { LocalAuthGuard } from './local-auth.guard';
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  //카카오 소셜 로그인
+  @Get('kakao')
+  @UseGuards(AuthGuard('kakao'))
+  async kakaoAuth(@Req() req: any) {
+    // 카카오 로그인 페이지로 리다이렉트
+    console.log(req);
+  }
+
+  @Get('kakao/callback')
+  @UseGuards(AuthGuard('kakao'))
+  async kakaoAuthRedirect(@Req() req) {
+    // 카카오에서 콜백 받은 후 처리
+    const user = await this.authService.validateUser(req.user);
+    return this.authService.kakaoLogin(user);
+  }
+
   @Post('signup')
   signUp(
     @Body()
@@ -28,11 +46,6 @@ export class AuthController {
     console.log(data.id);
     return this.authService.idValidCheck(data.id);
   }
-  @Post('nicknamevalidcheck')
-  nicknameValidCheck(@Body() data: { nickname: string }): any {
-    console.log(data.nickname);
-    return this.authService.nicknameValidCheck(data.nickname);
-  }
   @Post('login')
   login(@Body() data: { id: string; password: string }): any {
     return this.authService.login(data.id, data.password);
@@ -41,6 +54,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('logout')
   logout(@Body() data: { token: any }): any {
-    return this.authService.logout(data.token.value);
+    return this.authService.logout(data.token);
   }
 }

@@ -36,3 +36,5 @@ lerna-debug.log*
 
 # NestJs
 datasource.config.ts
+firebase.config.ts
+azure.config.ts
