@@ -6,7 +6,7 @@ import { authProviders } from './auth.providers';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
-import { KakaoStrategy } from './kakao.strategy';
+// import { KakaoStrategy } from './kakao.strategy';
 @Module({
   imports: [
     DatabaseModule,
@@ -17,6 +17,6 @@ import { KakaoStrategy } from './kakao.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [...authProviders, AuthService, JwtStrategy, KakaoStrategy],
+  providers: [...authProviders, AuthService, JwtStrategy],
 })
 export class AuthModule {}

@@ -6,7 +6,7 @@ import { UpdateModule } from './update/update.module';
 import { ViewModule } from './view/view.module';
 import { SummaryModule } from './summary/summary.module';
 import { AuthModule } from './auth/auth.module';
-import { FirebaseModule } from './firebase/firebase.module';
+import { FirebaseAdminModule } from './firebase/firebase.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -14,7 +14,7 @@ import { FirebaseModule } from './firebase/firebase.module';
     ViewModule,
     SummaryModule,
     AuthModule,
-    FirebaseModule,
+    FirebaseAdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

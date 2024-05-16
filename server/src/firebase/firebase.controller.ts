@@ -1,13 +1,18 @@
-// some.controller.ts
-import { Controller, Get } from '@nestjs/common';
+// app.controller.ts
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { FirebaseService } from './firebase.service';
 
-@Controller('example')
+@Controller('api')
 export class FirebaseController {
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private readonly firebaseService: FirebaseService) {}
 
-  @Get('data')
-  async getData() {
-    return await this.firebaseService.getDocuments('your-collection-path');
+  @Post('setData')
+  async setData(@Body() body: any): Promise<void> {
+    await this.firebaseService.setValue('/path', body);
+  }
+
+  @Get('getData')
+  async getData(): Promise<any> {
+    return this.firebaseService.getValue('/path');
   }
 }
