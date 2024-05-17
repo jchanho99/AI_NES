@@ -8,14 +8,15 @@ import { SummaryModule } from './summary/summary.module';
 import { AuthModule } from './auth/auth.module';
 import { FirebaseAdminModule } from './firebase/firebase.module';
 import { ConfigModule } from '@nestjs/config';
+import { SearchModule } from './search/search.module';
 @Module({
   imports: [
     DatabaseModule,
     UpdateModule,
+    SearchModule,
     ViewModule,
     SummaryModule,
     AuthModule,
-    FirebaseAdminModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),

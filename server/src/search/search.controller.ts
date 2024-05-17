@@ -7,6 +7,7 @@ export class SearchController {
 
   @Post(`news`)
   findAll(@Body() data: { query: string }): any {
+    console.log(data);
     return this.searchService.findAll(data.query);
   }
 }

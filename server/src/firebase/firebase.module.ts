@@ -12,13 +12,13 @@ import { FirebaseService } from './firebase.service';
     {
       provide: 'FIREBASE_ADMIN',
       useFactory: async () => {
-        const serviceAccount = require('./oss24-9d001-firebase-adminsdk-fozty-23b8ca9327.json'); // 경로 수정 필요
+        const serviceAccount = require('./oss24-9d001-firebase-adminsdk-fozty-b9d7e83f37.json'); // 경로 수정 필요
         admin.initializeApp({
           credential: admin.credential.cert(serviceAccount),
           databaseURL: 'https://oss24-9d001-default-rtdb.firebaseio.com/', // Firebase 프로젝트 ID 수정 필요
         });
         return admin;
-      },
+      }, 
     },
   ],
   exports: ['FIREBASE_ADMIN'],
