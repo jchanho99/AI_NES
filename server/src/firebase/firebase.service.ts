@@ -22,7 +22,6 @@ export class FirebaseService {
   }
 }
 
-
 // import { Injectable } from '@nestjs/common';
 // import { initializeApp, getApp, getApps } from 'firebase/app';
 // import { getDatabase } from 'firebase/database';

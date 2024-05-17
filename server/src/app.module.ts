@@ -7,6 +7,7 @@ import { ViewModule } from './view/view.module';
 import { SummaryModule } from './summary/summary.module';
 import { AuthModule } from './auth/auth.module';
 import { FirebaseAdminModule } from './firebase/firebase.module';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     DatabaseModule,
@@ -15,6 +16,9 @@ import { FirebaseAdminModule } from './firebase/firebase.module';
     SummaryModule,
     AuthModule,
     FirebaseAdminModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
