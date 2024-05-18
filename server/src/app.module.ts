@@ -13,6 +13,7 @@ import { SearchModule } from './search/search.module';
   imports: [
     DatabaseModule,
     UpdateModule,
+    FirebaseAdminModule,
     SearchModule,
     ViewModule,
     SummaryModule,

@@ -13,6 +13,6 @@ export class FirebaseController {
 
   @Get('getData')
   async getData(): Promise<any> {
-    return this.firebaseService.getValue('/path');
+    return this.firebaseService.getValue('/students');
   }
 }

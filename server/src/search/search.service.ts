@@ -14,17 +14,19 @@ export class SearchService {
 
   async findAll(query: string): Promise<Observable<AxiosResponse<any, any>>> {
     const query1 = encodeURI(query);
-    const api_url = `https://openapi.naver.com/v1/search/news.json?query=` + query1;
+    const api_url =
+      `https://openapi.naver.com/v1/search/news.json?query=` + query1;
     const options = {
       url: api_url,
       headers: {
-        'X-Naver-Client-Id': 'r7vZcdRA_fofmbvJn5Zm',
-        'X-Naver-Client-Secret': 'gEWgSn8g2x'
+        'X-Naver-Client-Id': this.configService.get<string>('NAVER_CLIENT_ID'),
+        'X-Naver-Client-Secret': this.configService.get<string>(
+          'NAVER_CLIENT_SECRET',
+        ),
       },
     };
-
-    return this.httpService.get(api_url, { headers: options.headers }).pipe(
-      map(response => response.data)
-    );
+    return this.httpService
+      .get(api_url, { headers: options.headers })
+      .pipe(map((response) => response.data));
   }
 }
