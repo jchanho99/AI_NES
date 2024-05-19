@@ -15,31 +15,26 @@ export class AuthService {
   //1. 인가 코드 받기
   async getCode(): Promise<Observable<AxiosResponse<any, any>>> {
     const client_id = this.configService.get<string>('KAKAO_CLIENT_ID');
-    const redirect_uri = `http://localhost:3000/auth/getToken`;
+    const redirect_uri = `http://localhost:3000`;
     const api_url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}`;
     return this.httpService.get(api_url).pipe(map((response) => response.data));
   }
   //2. 토큰 발급
-  async getToken(code: string): Promise<any> {
-    const client_id = this.configService.get<string>('KAKAO_CLIENT_ID');
-    const redirect_uri = `http://localhost:3000`;
-    const options = {
-      headers: {
-        'Content-type': `application/x-www-form-urlencoded;charset=utf-8`,
-      },
-      body: {
-        grant_type: 'authorization_code',
-        client_id: this.configService.get<string>('KAKAO_CLIENT_ID'),
-        redirect_uri: 'http://localhost:3000',
-        code: code,
-      },
+  async getToken(code: string): Promise<Observable<AxiosResponse<any, any>>> {
+    const url = 'https://kauth.kakao.com/oauth/token?';
+    const data = {
+      grant_type: 'authorization_code',
+      client_id: this.configService.get<string>('KAKAO_CLIENT_ID'),
+      redirect_uri: `http://localhost:3000`,
+      code: code,
     };
-    const url = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${client_id}&redirect_uri=${redirect_uri}&code=${code}`;
-    const res = this.httpService
-      .post(url, { headers: options.headers })
+    const params = new URLSearchParams(data).toString();
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    };
+    return this.httpService
+      .post(url, params, { headers })
       .pipe(map((response) => response.data));
-    if (!res) return 'hello world!';
-    else return res;
   }
   //3. 로그인처리 + 사용자 정보 가져오기
 
