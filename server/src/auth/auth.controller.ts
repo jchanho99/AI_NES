@@ -1,12 +1,4 @@
-import {
-  Query,
-  Body,
-  Controller,
-  Get,
-  Post,
-  UseGuards,
-  Req,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -24,6 +16,15 @@ export class AuthController {
     console.log(data);
     return this.authService.getToken(data.code);
   }
+  @Post('getUser')
+  async getUser(@Body() data: { token: string }) {
+    return this.authService.getUser(data.token);
+  }
+  @Post('logout')
+  async logout(@Body() data: { token: string }) {
+    return this.authService.kakaoLogout(data.token);
+  }
+
   //카카오 소셜 로그인
   @Get('kakao')
   @UseGuards(AuthGuard('kakao'))

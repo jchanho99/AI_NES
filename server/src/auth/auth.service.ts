@@ -37,7 +37,28 @@ export class AuthService {
       .pipe(map((response) => response.data));
   }
   //3. 로그인처리 + 사용자 정보 가져오기
-
+  async getUser(token: string): Promise<Observable<AxiosResponse<any, any>>> {
+    const url = 'https://kapi.kakao.com/v2/user/me';
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    };
+    return this.httpService
+      .post(url, { headers })
+      .pipe(map((response) => response.data));
+  }
+  //4. 로그아웃
+  async kakaoLogout(
+    token: string,
+  ): Promise<Observable<AxiosResponse<any, any>>> {
+    const url = `https://kapi.kakao.com/v1/user/logout`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    return this.httpService
+      .post(url, { headers })
+      .pipe(map((response) => response.data));
+  }
   //Kakao 소셜 로그인
   async validateUser(userData: any): Promise<any> {
     // 사용자 데이터베이스에 저장하거나 업데이트
