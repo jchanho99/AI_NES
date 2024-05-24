@@ -16,22 +16,22 @@ export class AuthService {
   async getCode(): Promise<Observable<AxiosResponse<any, any>>> {
     const client_id = this.configService.get<string>('KAKAO_CLIENT_ID');
     const redirect_uri = `http://localhost:3000`;
-    const api_url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}`;
+    const api_url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=account_email,gender`;
     return this.httpService.get(api_url).pipe(map((response) => response.data));
   }
   //2. 인가코드로 카카오 토큰 발급
   async getToken(code: string): Promise<Observable<AxiosResponse<any, any>>> {
     const url = 'https://kauth.kakao.com/oauth/token?';
-    const data = {
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    };
+    const qeury = {
       grant_type: 'authorization_code',
       client_id: this.configService.get<string>('KAKAO_CLIENT_ID'),
       redirect_uri: `http://localhost:3000`,
       code: code,
     };
-    const params = new URLSearchParams(data).toString();
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-    };
+    const params = new URLSearchParams(qeury).toString();
     return this.httpService
       .post(url, params, { headers })
       .pipe(map((response) => response.data));
@@ -39,13 +39,21 @@ export class AuthService {
   //3. 카카오 로그인처리 + 사용자 정보 가져오기
   //사용자 정보 반환과 함께, 로그인 처리 -> jwtToken도 동시에 발급
   async getUser(token: string): Promise<Observable<AxiosResponse<any, any>>> {
-    const url = 'https://kapi.kakao.com/v2/user/me';
+    const url = 'https://kapi.kakao.com/v2/user/me?property_keys=["kakao_account.email","kakao_account.gender"]';
     const headers = {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     };
+    // const query = {
+    //   property_keys: `['kakao_account.gender','kakao_accout.email]`,
+    // };
+    // const params = new URLSearchParams(query).toString();
+    const payload = { id: "idid" };
+    const access_token = this.jwtService.sign(payload);
+    console.log(access_token);
+
     return this.httpService
-      .get(url, { headers })
+      .get(url ,{ headers })
       .pipe(map((response) => response.data));
   }
   //4. 카카오 로그아웃
