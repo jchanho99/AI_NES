@@ -13,6 +13,8 @@ export class FirebaseController {
 
   @Get('getData')
   async getData(): Promise<any> {
-    return this.firebaseService.getValue('/students');
+    return this.firebaseService.getValue(
+      '/2024년05월22일 , 10시26분56초 네이버 기사 헤드라인',
+    );
   }
 }

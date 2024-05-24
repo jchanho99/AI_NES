@@ -12,14 +12,14 @@ export class AuthService {
     private httpService: HttpService,
     private configService: ConfigService,
   ) {}
-  //1. 인가 코드 받기
+  //1. 카카오 인가 코드 받기
   async getCode(): Promise<Observable<AxiosResponse<any, any>>> {
     const client_id = this.configService.get<string>('KAKAO_CLIENT_ID');
     const redirect_uri = `http://localhost:3000`;
     const api_url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}`;
     return this.httpService.get(api_url).pipe(map((response) => response.data));
   }
-  //2. 토큰 발급
+  //2. 인가코드로 카카오 토큰 발급
   async getToken(code: string): Promise<Observable<AxiosResponse<any, any>>> {
     const url = 'https://kauth.kakao.com/oauth/token?';
     const data = {
@@ -36,7 +36,8 @@ export class AuthService {
       .post(url, params, { headers })
       .pipe(map((response) => response.data));
   }
-  //3. 로그인처리 + 사용자 정보 가져오기
+  //3. 카카오 로그인처리 + 사용자 정보 가져오기
+  //사용자 정보 반환과 함께, 로그인 처리 -> jwtToken도 동시에 발급
   async getUser(token: string): Promise<Observable<AxiosResponse<any, any>>> {
     const url = 'https://kapi.kakao.com/v2/user/me';
     const headers = {
@@ -44,10 +45,10 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     };
     return this.httpService
-      .post(url, { headers })
+      .get(url, { headers })
       .pipe(map((response) => response.data));
   }
-  //4. 로그아웃
+  //4. 카카오 로그아웃
   async kakaoLogout(
     token: string,
   ): Promise<Observable<AxiosResponse<any, any>>> {
@@ -62,6 +63,7 @@ export class AuthService {
   //Kakao 소셜 로그인
   async validateUser(userData: any): Promise<any> {
     // 사용자 데이터베이스에 저장하거나 업데이트
+
     return userData;
   }
 
