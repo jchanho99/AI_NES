@@ -39,22 +39,21 @@ export class AuthService {
   //3. 카카오 로그인처리 + 사용자 정보 가져오기
   //사용자 정보 반환과 함께, 로그인 처리 -> jwtToken도 동시에 발급
   async getUser(token: string): Promise<Observable<AxiosResponse<any, any>>> {
-    const url = 'https://kapi.kakao.com/v2/user/me?property_keys=["kakao_account.email","kakao_account.gender"]';
+    const url =
+      'https://kapi.kakao.com/v2/user/me?property_keys=["kakao_account.email","kakao_account.gender"]';
     const headers = {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     };
-    // const query = {
-    //   property_keys: `['kakao_account.gender','kakao_accout.email]`,
-    // };
-    // const params = new URLSearchParams(query).toString();
-    const payload = { id: "idid" };
-    const access_token = this.jwtService.sign(payload);
-    console.log(access_token);
 
-    return this.httpService
-      .get(url ,{ headers })
-      .pipe(map((response) => response.data));
+    return this.httpService.get(url, { headers }).pipe(
+      map((response) => {
+        const id = response.data.id; // Kakao API 응답에서 id 추출
+        const payload = { id: id };
+        const jwt_token = this.jwtService.sign(payload); // JWT 생성
+        return { ...response.data, jwt_token }; // 기존 데이터에 access_token 추가하여 반환
+      }),
+    );
   }
   //4. 카카오 로그아웃
   async kakaoLogout(
@@ -67,18 +66,5 @@ export class AuthService {
     return this.httpService
       .post(url, { headers })
       .pipe(map((response) => response.data));
-  }
-  //Kakao 소셜 로그인
-  async validateUser(userData: any): Promise<any> {
-    // 사용자 데이터베이스에 저장하거나 업데이트
-
-    return userData;
-  }
-
-  async kakaoLogin(user: any) {
-    const payload = { email: user.email, sub: user.kakaoId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
   }
 }
