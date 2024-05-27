@@ -7,9 +7,13 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { HttpModule } from '@nestjs/axios';
+import * as admin from 'firebase-admin';
+import { ConfigService } from '@nestjs/config';
+import { FirebaseAdminModule } from 'src/firebase/firebase.module';
 // import { KakaoStrategy } from './kakao.strategy';
 @Module({
   imports: [
+    FirebaseAdminModule,
     DatabaseModule,
     HttpModule,
     JwtModule.register({
