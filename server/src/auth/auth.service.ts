@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { AxiosResponse } from 'axios';
-import { NotFoundError, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import * as bcrypt from 'bcrypt';
@@ -17,9 +17,11 @@ export class AuthService {
     private httpService: HttpService,
     private configService: ConfigService,
     @Inject('FIREBASE_ADMIN')
-    private readonly admin: admin.app.App
-  ) { this.db = this.admin.database(); }
-  
+    private readonly admin: admin.app.App,
+  ) {
+    this.db = this.admin.database();
+  }
+
   //1. 카카오 인가 코드 받기
   async getCode(): Promise<Observable<AxiosResponse<any, any>>> {
     const client_id = this.configService.get<string>('KAKAO_CLIENT_ID');
@@ -80,9 +82,15 @@ export class AuthService {
   async signup(data: any): Promise<any> {
     const ref = this.db.ref(`/users`);
     //중복확인
-    const snapshot = await ref.orderByChild('id').equalTo(data.id).once('value');
-    if (snapshot.exists()){
-      throw new HttpException('User with the same id already exists.', HttpStatus.BAD_REQUEST);
+    const snapshot = await ref
+      .orderByChild('id')
+      .equalTo(data.id)
+      .once('value');
+    if (snapshot.exists()) {
+      throw new HttpException(
+        'User with the same id already exists.',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     //비밀번호 해쉬 후 푸쉬
     const saltOrRounds = 10;
@@ -90,30 +98,32 @@ export class AuthService {
     await ref.push({
       id: data.id,
       email: data.email,
-      password: hashPassword
+      password: hashPassword,
     });
     return true;
   }
 
   async login(data: any): Promise<any> {
     const ref = this.db.ref(`/users`);
-    const snapshot = await ref.orderByChild('id').equalTo(data.id).once('value');
+    const snapshot = await ref
+      .orderByChild('id')
+      .equalTo(data.id)
+      .once('value');
     if (snapshot.exists()) {
       const userData = snapshot.val();
       const userKey = Object.keys(userData)[0];
       const user = userData[userKey];
       const hashedPassword = user.password;
       const isMatch = bcrypt.compareSync(data.password, hashedPassword);
-      if(isMatch) {
+      if (isMatch) {
         const payload = { id: data.id };
         const jwt_token = this.jwtService.sign(payload);
         const ret = {
           id: data.id,
           jwt_token: jwt_token,
-        }
+        };
         return ret;
-      }
-      else {
+      } else {
         return false;
       }
     } else {

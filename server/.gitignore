@@ -41,3 +41,4 @@ azure.config.ts
 oss24-9d001-firebase-adminsdk-fozty-b9d7e83f37.json
 oss24-9d001-firebase-adminsdk-fozty-23b8ca9327.json
 *.env
+constants.ts

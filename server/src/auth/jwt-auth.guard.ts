@@ -8,12 +8,10 @@ import { AuthGuard } from '@nestjs/passport';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(context: ExecutionContext) {
-    console.log('인증시도1');
     return super.canActivate(context);
   }
 
-  handleRequest(err, user, info) {
-    console.log('인증시도2');
+  handleRequest(err: any, user: any, info: any) {
     if (err || !user) {
       console.log(info);
       throw err || new UnauthorizedException();
