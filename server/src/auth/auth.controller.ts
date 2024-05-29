@@ -12,9 +12,8 @@ export class AuthController {
   }
 
   @Post('getToken')
-  async getToken(@Body() data: { auth_code: string }) {
-    console.log(data);
-    return this.authService.getToken(data.auth_code);
+  async getToken(@Body() auth_code: any) {
+    return this.authService.getToken(auth_code);
   }
   @Post('getUser')
   async getUser(@Body() data: { access_token: string }) {
