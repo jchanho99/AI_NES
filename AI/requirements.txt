@@ -1,2 +1,4 @@
 torch
 firebase-admin
+pandas
+git+https://git@github.com/SKTBrain/KoBERT.git@master
