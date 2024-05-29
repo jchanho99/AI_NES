@@ -13,6 +13,7 @@ export class AuthController {
 
   @Post('getToken')
   async getToken(@Body() auth_code: any) {
+    console.log(auth_code);
     return this.authService.getToken(auth_code);
   }
   @Post('getUser')
