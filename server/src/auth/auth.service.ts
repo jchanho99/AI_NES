@@ -38,7 +38,7 @@ export class AuthService {
     const qeury = {
       grant_type: 'authorization_code',
       client_id: this.configService.get<string>('KAKAO_CLIENT_ID'),
-      redirect_uri: `http://localhost:3000`,
+      redirect_uri: `https://aines-front.run.goorm.site/login/kakao`,
       code: code,
     };
     const params = new URLSearchParams(qeury).toString();
