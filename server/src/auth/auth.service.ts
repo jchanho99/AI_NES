@@ -31,6 +31,7 @@ export class AuthService {
   }
   //2. 인가코드로 카카오 토큰 발급
   async getToken(code: string): Promise<Observable<AxiosResponse<any, any>>> {
+    console.log(code);
     const url = 'https://kauth.kakao.com/oauth/token?';
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
