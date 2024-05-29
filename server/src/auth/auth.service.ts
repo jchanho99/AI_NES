@@ -25,7 +25,7 @@ export class AuthService {
   //1. 카카오 인가 코드 받기
   async getCode(): Promise<Observable<AxiosResponse<any, any>>> {
     const client_id = this.configService.get<string>('KAKAO_CLIENT_ID');
-    const redirect_uri = `http://localhost:3000`;
+    const redirect_uri = `https://aines-front.run.goorm.site`;
     const api_url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=account_email,gender`;
     return this.httpService.get(api_url).pipe(map((response) => response.data));
   }
