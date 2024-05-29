@@ -19,7 +19,7 @@
 ## :floppy_disk: Languages and Frameworks
 - **Frontend**: Next.js(javascript)
 - **Backend**: Nest.js(javascript)
-- **Database**: MySQL
+- **Database**: firebase - Realtime Database
 - **Crawler**: trafilatura(python3)
 - **APIs**: 네이버 뉴스 API, ChatGPT API
 <br>
