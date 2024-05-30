@@ -4,9 +4,12 @@ import requests
 import trafilatura
 import datetime
 
+from summarization import get_summarization
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+from kor_template import kor_prompt_template
+
 
 
 
@@ -44,7 +47,8 @@ def crawling(result_list):
                 'title': strong.text if strong else None, # title
                 'press': div.text if div else None, # press
                 'section': section, #news section
-                'origin_news' : get_news(a['href']) # origin news
+                'origin_news' : get_news(a['href']), # origin news
+                'summary' : get_summarization(get_news(a['href']),kor_prompt_template)
             }
             result_list.append(result)
 
