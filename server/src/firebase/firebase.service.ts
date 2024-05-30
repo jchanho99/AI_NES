@@ -5,7 +5,10 @@ import {
   getAuth,
   signInWithCredential,
   GoogleAuthProvider,
+  onAuthStateChanged 
 } from 'firebase/auth';
+import { initializeApp } from "firebase/app"
+
 
 @Injectable()
 export class FirebaseService {
@@ -14,24 +17,6 @@ export class FirebaseService {
   constructor(@Inject('FIREBASE_ADMIN') private readonly admin: admin.app.App) {
     this.db = this.admin.database();
   }
-  async signin(id_token: any): Promise<any> {
-    // Build Firebase credential with the Google ID token.
-    const credential = GoogleAuthProvider.credential(id_token);
-
-    // Sign in with credential from the Google user.
-    const auth = getAuth();
-    return signInWithCredential(auth, credential).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
-    });
-  }
-
   async setValue(path: string, value: any): Promise<void> {
     const ref = this.db.ref(path);
     await ref.set(value);
