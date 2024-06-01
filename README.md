@@ -11,7 +11,7 @@
 3. **기사 요약 생성**
    - 가져온 뉴스 기사를 OpenAI API를 활용하여 요약합니다.
 4. **데이터 저장**
-   - 요약된 뉴스를 JSON 형태로 Firebase에 저장합니다.
+   - 요약된 뉴스, 뉴스원문, 언론사 등 데이터들을 JSON 형태로 Firebase에 저장합니다.
 
 ## 기술 스택
 - **스크래핑**: BeautifulSoup, Requests
