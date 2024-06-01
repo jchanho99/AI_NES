@@ -15,8 +15,4 @@ def get_summarization(news, prompt_template):
     llm_chain = LLMChain(llm=llm, prompt=prompt)
     llm_chain = prompt | llm
     result = llm_chain.invoke(inputtext)
-    return result
-#llm_chain.run(inputtext)
-    
-# simple_chain = prompt | llm
-# chain.invoke(inputtext)
+    return result.content

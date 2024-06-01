@@ -72,8 +72,7 @@ def firebase_update(firebase_admin_key_path, databaseURL, timenow):
 
     with open(timenow+".json",'r') as file:
         data = json.load(file)
-    
-    ref = db.reference(timenow)
-    
+    db_path = "news_data/"+timenow
+    ref = db.reference(db_path)
     ref.set(data)
 
