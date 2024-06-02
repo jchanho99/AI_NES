@@ -1,6 +1,14 @@
 // firebase.service.ts
 import { Injectable, Inject } from '@nestjs/common';
 import * as admin from 'firebase-admin';
+import {
+  getAuth,
+  signInWithCredential,
+  GoogleAuthProvider,
+  onAuthStateChanged 
+} from 'firebase/auth';
+import { initializeApp } from "firebase/app"
+
 
 @Injectable()
 export class FirebaseService {
@@ -9,7 +17,6 @@ export class FirebaseService {
   constructor(@Inject('FIREBASE_ADMIN') private readonly admin: admin.app.App) {
     this.db = this.admin.database();
   }
-
   async setValue(path: string, value: any): Promise<void> {
     const ref = this.db.ref(path);
     await ref.set(value);

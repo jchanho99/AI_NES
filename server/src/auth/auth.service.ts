@@ -1,17 +1,27 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import * as bcrypt from 'bcrypt';
+import * as admin from 'firebase-admin';
+
 @Injectable()
 export class AuthService {
+  private db: admin.database.Database;
   constructor(
     private jwtService: JwtService,
     private httpService: HttpService,
     private configService: ConfigService,
-  ) {}
+    @Inject('FIREBASE_ADMIN')
+    private readonly admin: admin.app.App,
+  ) {
+    this.db = this.admin.database();
+  }
+
   //1. 카카오 인가 코드 받기
   async getCode(): Promise<Observable<AxiosResponse<any, any>>> {
     const client_id = this.configService.get<string>('KAKAO_CLIENT_ID');
@@ -21,6 +31,7 @@ export class AuthService {
   }
   //2. 인가코드로 카카오 토큰 발급
   async getToken(code: string): Promise<Observable<AxiosResponse<any, any>>> {
+    console.log(code);
     const url = 'https://kauth.kakao.com/oauth/token?';
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -28,7 +39,7 @@ export class AuthService {
     const qeury = {
       grant_type: 'authorization_code',
       client_id: this.configService.get<string>('KAKAO_CLIENT_ID'),
-      redirect_uri: `http://localhost:3000`,
+      redirect_uri: `https://aines-front.run.goorm.site/login/kakao`,
       code: code,
     };
     const params = new URLSearchParams(qeury).toString();
@@ -66,5 +77,58 @@ export class AuthService {
     return this.httpService
       .post(url, { headers })
       .pipe(map((response) => response.data));
+  }
+
+  //자체 회원가입
+  async signup(data: any): Promise<any> {
+    const ref = this.db.ref(`/users`);
+    //중복확인
+    const snapshot = await ref
+      .orderByChild('id')
+      .equalTo(data.id)
+      .once('value');
+    if (snapshot.exists()) {
+      throw new HttpException(
+        'User with the same id already exists.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    //비밀번호 해쉬 후 푸쉬
+    const saltOrRounds = 10;
+    const hashPassword = await bcrypt.hash(data.password, saltOrRounds);
+    await ref.push({
+      id: data.id,
+      email: data.email,
+      password: hashPassword,
+    });
+    return true;
+  }
+
+  async login(data: any): Promise<any> {
+    const ref = this.db.ref(`/users`);
+    const snapshot = await ref
+      .orderByChild('id')
+      .equalTo(data.id)
+      .once('value');
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      const userKey = Object.keys(userData)[0];
+      const user = userData[userKey];
+      const hashedPassword = user.password;
+      const isMatch = bcrypt.compareSync(data.password, hashedPassword);
+      if (isMatch) {
+        const payload = { id: data.id };
+        const jwt_token = this.jwtService.sign(payload);
+        const ret = {
+          id: data.id,
+          jwt_token: jwt_token,
+        };
+        return ret;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

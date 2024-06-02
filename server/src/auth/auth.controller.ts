@@ -13,6 +13,7 @@ export class AuthController {
 
   @Post('getToken')
   async getToken(@Body() data: { auth_code: string }) {
+    console.log(data.auth_code);
     return this.authService.getToken(data.auth_code);
   }
   @Post('getUser')
@@ -23,5 +24,13 @@ export class AuthController {
   @Post('logout')
   async logout(@Body() data: { access_token: string }) {
     return this.authService.kakaoLogout(data.access_token);
+  }
+  @Post('signup')
+  async signup(@Body() data: any) {
+    return this.authService.signup(data);
+  }
+  @Post('login')
+  async login(@Body() data: any) {
+    return this.authService.login(data);
   }
 }
