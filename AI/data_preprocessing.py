@@ -5,7 +5,7 @@ from connect import init_db
 # Connect to db
 now = datetime.datetime.now().date()
 date = now.strftime("%Y_%m_%d")
-ref = init_db('2024_05_29')
+ref = init_db(date)
 
 def load_news(): # date = '2024년05월22일 , 10시26분56초 네이버 기사 헤드라인'
     # Collecting all news data from db

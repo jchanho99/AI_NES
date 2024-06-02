@@ -1,6 +1,4 @@
-torch
-transformer
 firebase-admin
+tensorflow
 pandas
-git+https://git@github.com/SKTBrain/KoBERT.git@master
-git+https://github.com/SKTBrain/KoBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf
+scikit-learn
