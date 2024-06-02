@@ -3,7 +3,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-def init_db():
+def init_db(date=None):
     # credentials
     cred = credentials.Certificate('json/AccountKey.json')
 
@@ -13,6 +13,10 @@ def init_db():
     })
 
     # Reference to the db
-    ref = db.reference('/')
+    if date==None:
+        ref = db.reference('news_data')
+    else:
+        ref = db.reference(f'news_data/{date}')
 
     return ref
+
