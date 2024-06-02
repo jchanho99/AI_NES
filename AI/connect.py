@@ -1,7 +1,6 @@
 # Connect to Firebase: Realtime Database
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
+from firebase_admin import credentials, db
 
 def init_db(date=None):
     # credentials
