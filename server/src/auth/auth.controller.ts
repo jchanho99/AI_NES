@@ -33,4 +33,8 @@ export class AuthController {
   async login(@Body() data: any) {
     return this.authService.login(data);
   }
+  @Post('google')
+  async userInformSave(@Body() data: any) {
+    return this.authService.userInformSave(data);
+  }
 }

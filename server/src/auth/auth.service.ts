@@ -81,7 +81,7 @@ export class AuthService {
 
   //자체 회원가입
   async signup(data: any): Promise<any> {
-    const ref = this.db.ref(`/users`);
+    const ref = this.db.ref(`/users/normal`);
     //중복확인
     const snapshot = await ref
       .orderByChild('id')
@@ -105,7 +105,7 @@ export class AuthService {
   }
 
   async login(data: any): Promise<any> {
-    const ref = this.db.ref(`/users`);
+    const ref = this.db.ref(`/users/normal`);
     const snapshot = await ref
       .orderByChild('id')
       .equalTo(data.id)
@@ -130,5 +130,26 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  async userInformSave(data: any): Promise <any> {
+    const ref = this.db.ref(`/users/google`);
+
+    const saltOrRounds = 10;
+    const hashPassword = await bcrypt.hash(data.password, saltOrRounds);
+    const payload = {
+      type: "google",
+      id: data.id,
+      email: data?.email,
+    };
+    
+    const suc = await ref.push({
+      id: data.id,
+      email: data?.email,
+      original_token: data?.token,
+      jwt_token :this.jwtService.sign(payload),
+      password: hashPassword,
+    });
+    return suc;
   }
 }
