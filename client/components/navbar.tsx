@@ -14,7 +14,7 @@ export default function Navbar() {
   const navigation = [
     { name: '대시보드', href: '/', current: currentPath == "/" ? true : false },
     { name: '팀 소개', href: './about', current: currentPath == "/about" ? true : false }
-  ]
+  ];
 
   const { jwt_token, logout, id, provider } = useAuthStore();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -42,7 +42,7 @@ export default function Navbar() {
   }
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className={navigation[0].current ? "absolute w-full z-50" : "bg-gray-800"}>
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -74,7 +74,7 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          item.current ? ' text-white' : 'text-gray-300  hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -89,10 +89,10 @@ export default function Navbar() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="relative flex rounded-full text-sm text-gray-300 hover:text-white ">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
-                      <UserCircleIcon className='h-8 w-8 text-gray-400 hover:text-white' />
+                      <span><UserCircleIcon className='h-8 w-8 z-50' /></span>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -144,7 +144,7 @@ export default function Navbar() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            <div className="space-y-1 px-2 pb-3 pt-2 bg-gray-900">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}

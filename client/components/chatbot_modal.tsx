@@ -72,7 +72,7 @@ export default function ChatbotModal() {
       <div className="fixed right-4 bottom-4">
         <button
           type="button"
-          className="rounded-3xl bg-blue-600 text-white p-3 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-white"
+          className="rounded-3xl bg-indigo-600 text-white p-3 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white"
           onClick={() => jwt_token ? setOpen(true) : setIsLoginOpen(true)}
         >
           <span className="sr-only">Open chatbot</span>

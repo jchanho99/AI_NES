@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ChatbotModal from "@/components/chatbot_modal";
+import classNames from "classnames";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={classNames(inter.className, 'bg-gray-800')}>
         <Navbar />
         {children}
         <ChatbotModal />

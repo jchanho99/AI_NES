@@ -1,11 +1,11 @@
 // news test
-import { type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
 export function POST(request: NextRequest) {
     const token = request.headers.get('Authorization');
     console.log(token);
     if(!token) return Response.error();
-    return Response.json(
+    const response =
         {
             "lastBuildDate": "Sun, 26 May 2024 15:33:15 +0900",
             "total": 99025,
@@ -83,5 +83,7 @@ export function POST(request: NextRequest) {
                     "pubDate": "Sun, 26 May 2024 14:47:00 +0900"
                 }
             ]
-        });
+        };
+
+        return new NextResponse(JSON.stringify(response), {status: 201});
 }
