@@ -159,13 +159,7 @@ export class AuthService {
       id: data.id,
       email: data?.email,
       original_token: data?.token,
-      jwt_token :jwt_token,
-    }).then(() => {
-      return jwt_token;
-    })
-    .catch((error) => {
-      return false;
-    });
+      jwt_token :jwt_token});
     return jwt_token;
   }
 }
