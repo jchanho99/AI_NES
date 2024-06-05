@@ -48,7 +48,7 @@ export class AuthService {
   }
   //3. 카카오 로그인처리 + 사용자 정보 가져오기
   //사용자 정보 반환과 함께, 로그인 처리 -> jwtToken도 동시에 발급
-  async getUser(token: string): Promise<Observable<AxiosResponse<any, any>>> {
+  async getUser(token: string): Promise<any> {
     const ref = this.db.ref(`/users/kakao`);
     const url =
       'https://kapi.kakao.com/v2/user/me?property_keys=["kakao_account.email","kakao_account.gender"]';
@@ -58,19 +58,30 @@ export class AuthService {
     };
 
     return this.httpService.get(url, { headers }).pipe(
-      map((response) => {
+      map(async (response) => {
+        console.log(response);
         const payload = {
-          type: "kakao",
+          type: 'kakao',
           id: response.data.id,
-          email: response.data.email
+          email: response.data.kakao_account.email,
         };
         const jwt_token = this.jwtService.sign(payload); // JWT 생성
         //DB에 정보 저장
-        console.log(ref.push({
-          id: response.data.id,
-          email: response.data.email,
-          jwt_token: jwt_token,
-        }));
+        const snapshot = await ref
+          .orderByChild('id')
+          .equalTo(response.data.id)
+          .once('value');
+        if (snapshot.exists()) {
+          const userKey = Object.keys(snapshot.val())[0];
+          const userRef = ref.child(userKey);
+          await userRef.update({ jwt_token: jwt_token });
+        } else {
+          await ref.push({
+            id: response.data.id,
+            email: response.data.kakao_account.email,
+            jwt_token: jwt_token,
+          });
+        }
         return { ...response.data, jwt_token }; // 기존 데이터에 access_token 추가하여 반환
       }),
     );
@@ -124,20 +135,18 @@ export class AuthService {
       const userData = snapshot.val();
       const userKey = Object.keys(userData)[0];
       const user = userData[userKey];
+      const userRef = ref.child(userKey);
       const hashedPassword = user.password;
       const isMatch = bcrypt.compareSync(data.password, hashedPassword);
       if (isMatch) {
         const payload = {
-          type: "normal",
+          type: 'normal',
           id: data.id,
-          email: data?.email
+          email: data?.email,
         };
         const jwt_token = this.jwtService.sign(payload);
-        const ret = {
-          id: data.id,
-          jwt_token: jwt_token,
-        };
-        return ret;
+        await userRef.update({ jwt_token: jwt_token });
+        return jwt_token;
       } else {
         return false;
       }
@@ -146,20 +155,38 @@ export class AuthService {
     }
   }
 
-  async userInformSave(data: any): Promise <any> {
+  async userInformSave(data: any): Promise<any> {
     const ref = this.db.ref(`/users/google`);
-
     const payload = {
-      type: "google",
+      type: 'google',
       id: data.id,
       email: data?.email,
     };
     const jwt_token = this.jwtService.sign(payload);
-    await ref.push({
-      id: data.id,
-      email: data?.email,
-      original_token: data?.token,
-      jwt_token :jwt_token});
-    return jwt_token;
+    try {
+      const snapshot = await ref
+        .orderByChild('id')
+        .equalTo(data.id)
+        .once('value');
+      if (snapshot.exists()) {
+        const userKey = Object.keys(snapshot.val())[0];
+        const userRef = ref.child(userKey);
+        await userRef.update({
+          jwt_token: jwt_token,
+          original_token: data.token,
+        });
+      } else {
+        await ref.push({
+          id: data.id,
+          email: data.email,
+          original_token: data.token,
+          jwt_token: jwt_token,
+        });
+      }
+      return jwt_token;
+    } catch (error) {
+      console.error('Error updating the user information:', error);
+      throw new Error('Failed to save user information');
+    }
   }
 }

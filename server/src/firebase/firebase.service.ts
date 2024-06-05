@@ -20,4 +20,15 @@ export class FirebaseService {
 
     return snapshot.val();
   }
+  async getSpecificValue(data: any): Promise<any> {
+    if (data.index) {
+      const ref = this.db.ref(`/news_data/${data.date}/${data.index}`);
+      const snapshot = await ref.once('value');
+      return snapshot.val();
+    } else if (!data.index) {
+      const ref = this.db.ref(`/news_data/${data.date}`);
+      const snapshot = await ref.once('value');
+      return snapshot.val();
+    }
+  }
 }
