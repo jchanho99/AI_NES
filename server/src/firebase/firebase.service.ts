@@ -1,14 +1,6 @@
 // firebase.service.ts
 import { Injectable, Inject } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-import {
-  getAuth,
-  signInWithCredential,
-  GoogleAuthProvider,
-  onAuthStateChanged 
-} from 'firebase/auth';
-import { initializeApp } from "firebase/app"
-
 
 @Injectable()
 export class FirebaseService {

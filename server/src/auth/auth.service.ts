@@ -31,7 +31,6 @@ export class AuthService {
   }
   //2. 인가코드로 카카오 토큰 발급
   async getToken(code: string): Promise<Observable<AxiosResponse<any, any>>> {
-    console.log(code);
     const url = 'https://kauth.kakao.com/oauth/token?';
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -50,6 +49,7 @@ export class AuthService {
   //3. 카카오 로그인처리 + 사용자 정보 가져오기
   //사용자 정보 반환과 함께, 로그인 처리 -> jwtToken도 동시에 발급
   async getUser(token: string): Promise<Observable<AxiosResponse<any, any>>> {
+    const ref = this.db.ref(`/users/kakao`);
     const url =
       'https://kapi.kakao.com/v2/user/me?property_keys=["kakao_account.email","kakao_account.gender"]';
     const headers = {
@@ -59,9 +59,18 @@ export class AuthService {
 
     return this.httpService.get(url, { headers }).pipe(
       map((response) => {
-        const id = response.data.id; // Kakao API 응답에서 id 추출
-        const payload = { id: id };
+        const payload = {
+          type: "kakao",
+          id: response.data.id,
+          email: response.data.email
+        };
         const jwt_token = this.jwtService.sign(payload); // JWT 생성
+        //DB에 정보 저장
+        console.log(ref.push({
+          id: response.data.id,
+          email: response.data.email,
+          jwt_token: jwt_token,
+        }));
         return { ...response.data, jwt_token }; // 기존 데이터에 access_token 추가하여 반환
       }),
     );
@@ -81,7 +90,7 @@ export class AuthService {
 
   //자체 회원가입
   async signup(data: any): Promise<any> {
-    const ref = this.db.ref(`/users`);
+    const ref = this.db.ref(`/users/normal`);
     //중복확인
     const snapshot = await ref
       .orderByChild('id')
@@ -104,8 +113,9 @@ export class AuthService {
     return true;
   }
 
+  //자체 로그인
   async login(data: any): Promise<any> {
-    const ref = this.db.ref(`/users`);
+    const ref = this.db.ref(`/users/normal`);
     const snapshot = await ref
       .orderByChild('id')
       .equalTo(data.id)
@@ -117,7 +127,11 @@ export class AuthService {
       const hashedPassword = user.password;
       const isMatch = bcrypt.compareSync(data.password, hashedPassword);
       if (isMatch) {
-        const payload = { id: data.id };
+        const payload = {
+          type: "normal",
+          id: data.id,
+          email: data?.email
+        };
         const jwt_token = this.jwtService.sign(payload);
         const ret = {
           id: data.id,
@@ -130,5 +144,22 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  async userInformSave(data: any): Promise <any> {
+    const ref = this.db.ref(`/users/google`);
+
+    const payload = {
+      type: "google",
+      id: data.id,
+      email: data?.email,
+    };
+    const jwt_token = this.jwtService.sign(payload);
+    await ref.push({
+      id: data.id,
+      email: data?.email,
+      original_token: data?.token,
+      jwt_token :jwt_token});
+    return jwt_token;
   }
 }
