@@ -22,8 +22,16 @@ export class FirebaseController {
 
   @Get('getData')
   async getData(): Promise<any> {
-    return this.firebaseService.getValue(
-      `/news_data/${this.getCurrentDate()}`,
-    );
+    return this.firebaseService.getValue(`/news_data/${this.getCurrentDate()}`);
+  }
+  @Post('getData')
+  async postData(@Body() body: any): Promise<any> {
+    if (!body.date) {
+      return this.firebaseService.getValue(
+        `/news_data/${this.getCurrentDate()}/${body.index}`,
+      );
+    } else {
+      return this.firebaseService.getSpecificValue(body);
+    }
   }
 }
