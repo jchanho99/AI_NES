@@ -1,6 +1,9 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GoogleService } from './google.service';
+import { ApiExcludeController } from '@nestjs/swagger';
+
+@ApiExcludeController()
 @Controller('google')
 export class GoogleController {
   constructor(private readonly googleService: GoogleService) {}
