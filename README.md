@@ -1,35 +1,35 @@
-# Backend Guide
-### Using Stack
-<div align=center>
-<img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
-<img src="https://img.shields.io/badge/amazonecs-FF9900?style=for-the-badge&logo=amazonecs&logoColor=white">
-<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
-<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
-<img src="https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white">
-<img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
-<img src="https://img.shields.io/badge/dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=white">
-<img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
-<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">
-<img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white">
-</div>
+# :mortar_board: AI 뉴스 감정분석 서비스(AI-NES)
+<br>
 
+## :+1: Overview
+> 전북대학교 컴퓨터인공지능학부 오픈소스소프트웨어개발 과목 팀프로젝트
 
-## 0. Need Environment
-- Node.js v20.11.1
-- <img src="https://img.shields.io/npm/v/npm.svg?logo=npm">
+> 사용자가 읽고 있는 뉴스 기사의 종류와 이 기사에 대한 사람들의 반응을 분석하여 여론을 조사하는 서비스
+<br>
 
-<a src=https://nodejs.org/en/download/prebuilt-installer>Click to Install Node.js</a>
+## :racehorse: Team Members
+팀원 | 담당 | 설명 
+--- | --- | --- 
+**전찬호** | 팀장, DB, 모델 | 뉴스 데이터를 저장할 DB 구성, 뉴스 자료의 감정 분석 모델 구현 
+**유상욱** | Fronend | 뉴스 자료 페이지, ChatGPT 질문 페이지 구성 
+**정석찬** | Backend | client와 DB 간의 Request/Response 처리 
+**김명규** | Crawler | 뉴스 데이터 수집 및 tag를 이용한 전저리 작업 진행 
+<br>
 
-## 1. First step.
-- Install package.json dependency collectively.
-```bash
-$git clone https://github.com/jchanho99/AI_NES
-$cd server
-$npm install
-```
-## 2. If you want start server in local
-```bash
-$npm run start
-```
+## :floppy_disk: Languages and Frameworks
+- **Frontend**: Next.js(javascript)
+- **Backend**: Nest.js(javascript)
+- **Database**: firebase - Realtime Database
+- **Crawler**: trafilatura(python3)
+- **APIs**: 네이버 뉴스 API, ChatGPT API
+<br>
+
+## :speedboat: Development Direction
+1. **클린 코드, 아키텍처**: 코딩을 모르는 사람이 봐도 단번에 이해할 수 있도록 정리된 프로그래밍을 지행합니다.
+2. **사용자 친화적 인터페이스**: 사용자가 쉽게 탐색할 수 있도록 직관적인 UI 개발에 중점을 둡니다.
+3. **뉴스 감정 분석 성능 최대화**: 뉴스의 감정과 사용자의 반응이 최대한 일치하도록 모델을 구성합니다.
+4. **서버 성능 최적화**: 빠른 뉴스 로딩 시간과 효율적인 데이터 처리를 위해 서버의 성능 최적화에 주력합니다.
+<br>
+
+## :computer: License
+이 프로젝트는 MIT 라이센스를 따릅니다.
