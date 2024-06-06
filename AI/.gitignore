@@ -1,0 +1,5 @@
+/.venv
+/json
+/csv
+/__pycache__
+sentiment

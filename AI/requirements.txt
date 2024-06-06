@@ -1,0 +1,5 @@
+firebase-admin
+tensorflow
+pandas
+scikit-learn
+googletrans
