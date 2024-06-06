@@ -1,102 +1,63 @@
+import { ArrowRightCircleIcon } from "@heroicons/react/20/solid"
+
+const links = [
+    { name: '기사 모아보기', href: '#headline' },
+    { name: '개발 문서', href: '#' },
+    { name: '팀 소개', href: './about' },
+    { name: 'Github', href: 'https://github.com/jchanho99/AI_NES' },
+]
+
 export default function Dashboard() {
     return (
-        <div className="relative isolate overflow-hidden bg-white ">
-            <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
-                <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
-                    <div className="sm:max-w-lg">
-                        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            뉴스와 여론이 한 페이지에
-                        </h1>
-                        <p className="mt-4 text-xl text-gray-500">
-                            뉴스 기사의 내용을 보기 쉽게 요약하고 여론의 감정을 예측합니다. AI가 분석하는 뉴스를 만나보세요.
-                        </p>
-                    </div>
-                    <div>
-                        <div className="mt-10">
-                            {/* Decorative image grid */}
-                            <div
-                                aria-hidden="true"
-                                className="pointer-events-none lg:absolute lg:inset-y-0 lg:mx-auto lg:w-full lg:max-w-7xl"
-                            >
-                                <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
-                                    <div className="flex items-center space-x-6 lg:space-x-8">
-                                        <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                                            <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
-                                                <img
-                                                    src="https://yt3.googleusercontent.com/w7ColCSgsKVMJuh6izq4oRlYn-ZkJ8roQuHQy1Nvc75ONCH7uzLmoUE5YMJtZqFCHb4ZFPxAOg=s900-c-k-c0x00ffffff-no-rj"
-                                                    alt=""
-                                                    className="h-full w-full object-cover object-center"
-                                                />
-                                            </div>
-                                            <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                <img
-                                                    src="https://yt3.googleusercontent.com/ytc/AIdro_k63f49sv4QTvI0tZZMCUW5jHrpALVurb9S7xgzjFMIfzQ=s900-c-k-c0x00ffffff-no-rj"
-                                                    alt=""
-                                                    className="h-full w-full object-cover object-center"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                                            <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                <img
-                                                    src="https://yt3.googleusercontent.com/gsNDSfvzKpZT0OEjTBFH5PxokZ7WeZQU5PcsMWD8vJyBI6ts4uUDic_KsipnVbIUhtToblLaig=s900-c-k-c0x00ffffff-no-rj"
-                                                    alt=""
-                                                    className="h-full w-full object-cover object-center"
-                                                />
-                                            </div>
-                                            <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                <img
-                                                    src="https://yt3.googleusercontent.com/27a9C8CL0rcNXGJ5UbsDJLMFOl0PIgc-5JEk65z9I2ZygKe-MUtw-Lwi5TD5q1UDLz3AqCyKUg=s900-c-k-c0x00ffffff-no-rj"
-                                                    alt=""
-                                                    className="h-full w-full object-cover object-center"
-                                                />
-                                            </div>
-                                            <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                <img
-                                                    src="https://yt3.googleusercontent.com/paBTeoyDdKqHGtVyAo4xT1bceZza4uCEUVMS0ehH4-ditjIR6I5mvNtQ7InBH3-g6KhiahFL8Q=s900-c-k-c0x00ffffff-no-rj"
-                                                    alt=""
-                                                    className="h-full w-full object-cover object-center"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                                            <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                <img
-                                                    src="https://yt3.googleusercontent.com/gtQSx9jIZk45taCqDMEIGxVaNDLRZnEkMnAbHx0K5PSXWQyFGGBdEjQ7FMYJ2y7WeHC5EKFbng4=s176-c-k-c0x00ffffff-no-rj"
-                                                    alt=""
-                                                    className="h-full w-full object-cover object-center"
-                                                />
-                                            </div>
-                                            <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                <img
-                                                    src="https://yt3.googleusercontent.com/ezG7fZAoI4puqxZvEHRY0Xfwl6CcR3bWRadwh-lg_-JSuBw9aK6hpJuR5wIlu1WHhsvseAWzfyA=s900-c-k-c0x00ffffff-no-rj"
-                                                    alt=""
-                                                    className="h-full w-full object-cover object-center"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <a
-                                href="#headline"
-                                className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
-                            >
-                                분석 시작하기
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6" aria-hidden="true">
+        <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+            <img
+                src="./images/bg_dashboard.jpg"
+                alt=""
+                className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center opacity-10"
+            />
+            <div
+                className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
+                aria-hidden="true"
+            >
                 <div
-                    className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
+                    className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-15"
                     style={{
                         clipPath:
                             'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
                     }}
                 />
+            </div>
+            <div
+                className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
+                aria-hidden="true"
+            >
+                <div
+                    className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-15"
+                    style={{
+                        clipPath:
+                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                    }}
+                />
+            </div>
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <div className="mx-auto max-w-2xl lg:mx-0">
+                    <h2 className="text-5xl font-bold tracking-tight text-white sm:text-7xl">뉴스와 여론이 한 페이지에</h2>
+                    <p className="mt-6 text-lg leading-8 text-gray-300">
+                        뉴스 기사의 내용을 보기 쉽게 요약하고 여론의 감정을 예측합니다. AI가 분석하는 뉴스를 만나보세요.
+                    </p>
+                </div>
+                <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+                    <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
+                        {links.map((link) => (
+                            <a key={link.name} href={link.href}>
+                                <span aria-hidden="true" className="flex items-center hover:text-gray-300">
+                                    {link.name}
+                                    <ArrowRightCircleIcon className="h-5 w-5 ml-1" />
+                                </span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -29,7 +29,7 @@ const people = [
 
 export default function About() {
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-white py-40 sm:py-48 rounded-2xl">
       <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">팀 소개</h2>

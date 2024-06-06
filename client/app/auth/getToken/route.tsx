@@ -1,10 +1,10 @@
 // getToken test
-import { type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
 export function POST(request: NextRequest) {
     const body = request.body;
     if(!body) return Response.error();
-    return Response.json(
+    const response =
         {
             "access_token": "ACCESS_TOKEN",
             "token_type": "bearer",
@@ -13,6 +13,7 @@ export function POST(request: NextRequest) {
             "expires_in": 21599,
             "scope": "openid",
             "refresh_token_expires_in": 5183999
-        }
-    );
+        };
+
+    return new NextResponse(JSON.stringify(response), {status: 201});
 }

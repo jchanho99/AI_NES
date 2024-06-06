@@ -9,7 +9,6 @@ export class FirebaseService {
   constructor(@Inject('FIREBASE_ADMIN') private readonly admin: admin.app.App) {
     this.db = this.admin.database();
   }
-
   async setValue(path: string, value: any): Promise<void> {
     const ref = this.db.ref(path);
     await ref.set(value);
@@ -20,5 +19,16 @@ export class FirebaseService {
     const snapshot = await ref.once('value');
 
     return snapshot.val();
+  }
+  async getSpecificValue(data: any): Promise<any> {
+    if (data.index) {
+      const ref = this.db.ref(`/news_data/${data.date}/${data.index}`);
+      const snapshot = await ref.once('value');
+      return snapshot.val();
+    } else if (!data.index) {
+      const ref = this.db.ref(`/news_data/${data.date}`);
+      const snapshot = await ref.once('value');
+      return snapshot.val();
+    }
   }
 }

@@ -1,24 +1,24 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { DatabaseModule } from '../database/database.module';
-import { authProviders } from './auth.providers';
+import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { HttpModule } from '@nestjs/axios';
-// import { KakaoStrategy } from './kakao.strategy';
+import { FirebaseAdminModule } from 'src/firebase/firebase.module';
 @Module({
   imports: [
-    DatabaseModule,
+    FirebaseAdminModule,
     HttpModule,
-    JwtModule.register({
-      global: true,
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+    JwtModule.registerAsync({
+      inject: [ConfigService], // ConfigService 주입
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'), // 'JWT_CONSTANTS' 대신 정확한 환경 변수 이름 사용
+        signOptions: { expiresIn: '24h' },
+      }),
     }),
   ],
   controllers: [AuthController],
-  providers: [...authProviders, AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

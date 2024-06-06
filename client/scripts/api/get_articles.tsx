@@ -1,61 +1,40 @@
-// posts.tsx
-// 백엔드로부터 기사 정보를 얻어올 스크립트
+import axios from "axios";
 
-class Article {
-    id: number;
-    title: string;
-    description: string;
-    summary: string;
-    date: string;
-    datetime: string;
+export interface Article {
+    id?: number;
+    link: string;
+    origin_news: string;
+    press: string;
     section: string;
-    author: { name: string; press: string; href: string; imageUrl: string };
-    thumbnail: string;
+    title: string;
+    summary?: string;
+}
 
-    constructor(
-        id: number,
-        title: string,
-        description: string,
-        summary: string,
-        date: string,
-        datetime: string,
-        section: string,
-        author: { name: string; press: string; href: string, imageUrl: string },
-        thumbnail: string
-    ) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.summary = summary;
-        this.date = date;
-        this.datetime = datetime;
-        this.section = section;
-        this.author = author;
-        this.thumbnail = thumbnail;
+interface GetArticlesResult {
+    status: number;
+    items?: Article[];
+}
+
+export default async function GetArticles(): Promise<GetArticlesResult> {
+    try {
+        const response = await axios.get<Article[]>("/service/api/getData");
+        if (response.status != 201 || response.data == null) {
+            return { status: response.status };
+        }
+
+        let index = 0;
+        for (const article of response.data) {
+            article.id = index++;
+            // todo: 실제 요약 구현
+            article.summary = "기사 내용 요약";
+        }
+        const getArticlesResult = { status: response.status, items: response.data };
+        // Debug
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        
+        return getArticlesResult;
+    } catch (err) {
+        console.error(err);
+        return { status: 500 };
     }
 }
-
-const articles: Article[] = [];
-
-// 디버깅용
-for (let i = 1; i <= 6; i++) {
-    const article = new Article(
-        i,
-        '기사 제목',
-        '기사 내용',
-        '기사 요약',
-        '2024년 4월 12일',
-        '2024-04-12',
-        '정치',
-        {
-            name: '기자',
-            press: '언론사',
-            href: '#',
-            imageUrl: 'https://yt3.googleusercontent.com/w7ColCSgsKVMJuh6izq4oRlYn-ZkJ8roQuHQy1Nvc75ONCH7uzLmoUE5YMJtZqFCHb4ZFPxAOg=s900-c-k-c0x00ffffff-no-rj',
-        },
-        'https://yt3.googleusercontent.com/w7ColCSgsKVMJuh6izq4oRlYn-ZkJ8roQuHQy1Nvc75ONCH7uzLmoUE5YMJtZqFCHb4ZFPxAOg=s900-c-k-c0x00ffffff-no-rj'
-    );
-    articles.push(article);
-}
-
-export { Article, articles };

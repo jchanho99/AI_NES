@@ -1,10 +1,10 @@
 // getUser test
-import { type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
 export function POST(request: NextRequest) {
     const body = request.body;
     if (!body) return Response.error();
-    return Response.json({
+    const response = {
         "id": 3488590382,
         "connected_at": "2024-05-19T05:44:47Z",
         "kakao_account": {
@@ -18,5 +18,7 @@ export function POST(request: NextRequest) {
             "gender": "male"
         },
         "jwt_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQ4ODU5MDM4MiwiaWF0IjoxNzE2NzA0MzE1LCJleHAiOjE3MTY3MDQzNzV9.kGshC-LCHrkc4f8uQnhbbP5TmhRoZ9SNxNb8D4ZB8JE"
-    });
+    };
+
+    return new NextResponse(JSON.stringify(response), {status: 201});
 }

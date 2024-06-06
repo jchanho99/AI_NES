@@ -19,7 +19,7 @@
 ## :floppy_disk: Languages and Frameworks
 - **Frontend**: Next.js(javascript)
 - **Backend**: Nest.js(javascript)
-- **Database**: MySQL
+- **Database**: firebase - Realtime Database
 - **Crawler**: trafilatura(python3)
 - **APIs**: 네이버 뉴스 API, ChatGPT API
 <br>
@@ -29,6 +29,10 @@
 2. **사용자 친화적 인터페이스**: 사용자가 쉽게 탐색할 수 있도록 직관적인 UI 개발에 중점을 둡니다.
 3. **뉴스 감정 분석 성능 최대화**: 뉴스의 감정과 사용자의 반응이 최대한 일치하도록 모델을 구성합니다.
 4. **서버 성능 최적화**: 빠른 뉴스 로딩 시간과 효율적인 데이터 처리를 위해 서버의 성능 최적화에 주력합니다.
+<br>
+
+## 🌱 Instructions
+> 각 폴더의 README.md를 참고하세요!
 <br>
 
 ## :computer: License
