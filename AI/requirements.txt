@@ -3,3 +3,6 @@ tensorflow
 pandas
 scikit-learn
 googletrans
+azure-functions
+transformers
+latest
