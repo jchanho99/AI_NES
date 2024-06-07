@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiBearerAuth, ApiTags, ApiOperation, ApiBody, ApiResponse, ApiExcludeEndpoint, ApiProduces, ApiConsumes} from '@nestjs/swagger'
 import { KakaoAuthDto } from './dto/kakaoAuth.dto';
-import { AuthDto } from './dto/auth.dto';
+import { SignUpDto, GoogleSaveDto, LoginDto } from './dto/auth.dto';
 
 
 @ApiTags('인증 요청 API')
@@ -59,18 +59,10 @@ export class AuthController {
   @ApiOperation({ summary: '일반 사용자 회원가입' })
   @ApiBody({
     description: '회원가입에 필요한 정보',
-    type: AuthDto,
-  })
-
-  @ApiProduces('application/json')
-  @ApiConsumes('application/json')
-  @ApiOperation({ summary: '일반 사용자 회원가입' })
-  @ApiBody({
-    description: '회원가입에 필요한 정보',
-    type: AuthDto,
+    type: SignUpDto,
   })
   @Post('signup')
-  async signup(@Body() data: AuthDto) {
+  async signup(@Body() data: SignUpDto) {
     return this.authService.signup(data);
   }
 
@@ -79,10 +71,10 @@ export class AuthController {
   @ApiOperation({ summary: '일반 사용자 로그인' })
   @ApiBody({
     description: '정보 확인에 필요한 데이터',
-    type: AuthDto,
+    type: LoginDto,
   })
   @Post('login')
-  async login(@Body() data: AuthDto) {
+  async login(@Body() data: LoginDto) {
     return this.authService.login(data);
   }
 
@@ -91,10 +83,10 @@ export class AuthController {
   @ApiOperation({ summary: '구글 사용자 정보 저장 및 JWT 토큰 발급' })
   @ApiBody({
     description: '구글 사용자 정보와 토큰',
-    type: AuthDto,
+    type: GoogleSaveDto,
   })
   @Post('save')
-  async userInformSave(@Body() data: AuthDto) {
+  async userInformSave(@Body() data: GoogleSaveDto) {
     return this.authService.userInformSave(data);
   }
 }
