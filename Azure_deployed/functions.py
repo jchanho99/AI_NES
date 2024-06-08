@@ -60,19 +60,23 @@ def get_json_title():
     return timenow
     
 
-def dump_result_list(data, timenow):
-    with open(timenow+".json",'w', encoding='utf-8') as f:
-        json.dump(data,f,ensure_ascii=False, indent=4)
-
+def dump_result_list(data):
+    json_data = json.dumps(data,ensure_ascii=False, indent=4)
+    json_dict = json.loads(json_data)
+    return json_dict
 
 ## firebase update
-def firebase_update(firebase_admin_key_path, databaseURL, timenow):
-    cred = credentials.Certificate(firebase_admin_key_path)
-    firebase_admin.initialize_app(cred, databaseURL)
+def initialize_firebase(firebase_admin_key_path, databaseURL):
+    if not firebase_admin._apps:
+        cred = credentials.Certificate(firebase_admin_key_path)
+        firebase_admin.initialize_app(cred, {'databaseURL': databaseURL})
 
-    with open(timenow+".json",'r') as file:
-        data = json.load(file)
-    db_path = "news_data/"+timenow
-    ref = db.reference(db_path)
-    ref.set(data)
-
+# 데이터 업데이트 함수
+def firebase_update(firebase_admin_key_path, databaseURL, timenow, json_dict):
+    # Firebase 초기화 호출
+    initialize_firebase(firebase_admin_key_path, databaseURL)
+    
+    # 데이터베이스 참조 경로 설정 및 데이터 저장
+    db_path = "news_data"
+    ref = db.reference(db_path).child(timenow)
+    ref.set(json_dict)
