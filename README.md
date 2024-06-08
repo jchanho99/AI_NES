@@ -1,46 +1,39 @@
-# AI News Thumbnail Webpage - Crawling
+# :mortar_board: AI 뉴스 감정분석 서비스(AI-NES)
+<br>
 
-## 프로젝트 개요
-이 프로젝트는 AI 기술을 활용하여 뉴스 헤드라인과 링크를 스크래핑하고, 뉴스 기사의 원문을 요약하여 사용자에게 제공합니다. ~~AWS 서버리스 환경을 이용하여 자동화된 시스템을 구축합니다.~~
-Azure Function apps를 사용하여 자동화된 시스템을 구축합니다.
+## :+1: Overview
+> 전북대학교 컴퓨터인공지능학부 오픈소스소프트웨어개발 과목 팀프로젝트
 
-## 주요 기능
-1. **뉴스 헤드라인 및 링크 스크래핑**
-   - 뉴스 사이트에서 최신 헤드라인과 링크를 스크래핑합니다.
-2. **뉴스 기사 원문 가져오기**
-   - 스크래핑한 링크를 따라가 trafilatura를 사용하여 뉴스 기사 원문을 가져옵니다.
-3. **기사 요약 생성**
-   - 가져온 뉴스 기사를 OpenAI API를 활용하여 요약합니다.
-4. **데이터 저장**
-   - 요약된 뉴스, 뉴스원문, 언론사 등 데이터들을 JSON 형태로 Firebase에 저장합니다.
+> 사용자가 읽고 있는 뉴스 기사의 종류와 이 기사에 대한 사람들의 반응을 분석하여 여론을 조사하는 서비스
+<br>
 
-## 기술 스택
-- **스크래핑**: BeautifulSoup, Requests
-- **기사 원문 추출**: Trafliatura
-- **요약 생성**: OpenAI API, Langchain
-- **데이터베이스**: Firebase
-- **클라우드 환경**: ~~AWS Lambda, AWS API Gateway~~ Azure Portal, Azure CLI
-- **언어**: Python
+## :racehorse: Team Members
+팀원 | 담당 | 설명 
+--- | --- | --- 
+**전찬호** | 팀장, DB, 모델 | 뉴스 데이터를 저장할 DB 구성, 뉴스 자료의 감정 분석 모델 구현 
+**유상욱** | Fronend | 뉴스 자료 페이지, ChatGPT 질문 페이지 구성 
+**정석찬** | Backend | client와 DB 간의 Request/Response 처리 
+**김명규** | Crawler | 뉴스 데이터 수집 및 tag를 이용한 전저리 작업 진행 
+<br>
 
-## 설치 및 설정 방법
-### 사전 요구사항
-~~- AWS 계정~~
-- Azure 계정
-- Firebase 프로젝트(realtime DB)
-- OpenAI API 키
+## :floppy_disk: Languages and Frameworks
+- **Frontend**: Next.js(javascript)
+- **Backend**: Nest.js(javascript)
+- **Database**: firebase - Realtime Database
+- **Crawler**: trafilatura(python3)
+- **APIs**: 네이버 뉴스 API, ChatGPT API
+<br>
 
-### 환경 설정
-~~1. **AWS 설정**~~
-   ~~- AWS Lambda와 S3 버킷을 설정합니다.~~
-   ~~- AWS CLI를 설치하고 구성합니다.~~
-   
-1. ** Azure 설정 **
-   - Azure Function App 를 생성하고 Timer Trigger Function app 을 설정합니다.
-   - Azure CLI, Azure Core Tools를 설치하고 구성합니다.
-   - VScode(IDE) 상에서 Azure CLI 와 Azure Core Tools 등 여러 Extension들을 설치합니다.
-2. **Firebase 설정**
-   - Firebase 프로젝트를 생성하고, 실시간 데이터베이스를 설정합니다.
-   - Firebase Admin SDK를 설정하고, 서비스 계정 키 json 파일을 생성합니다.
+## :speedboat: Development Direction
+1. **클린 코드, 아키텍처**: 코딩을 모르는 사람이 봐도 단번에 이해할 수 있도록 정리된 프로그래밍을 지행합니다.
+2. **사용자 친화적 인터페이스**: 사용자가 쉽게 탐색할 수 있도록 직관적인 UI 개발에 중점을 둡니다.
+3. **뉴스 감정 분석 성능 최대화**: 뉴스의 감정과 사용자의 반응이 최대한 일치하도록 모델을 구성합니다.
+4. **서버 성능 최적화**: 빠른 뉴스 로딩 시간과 효율적인 데이터 처리를 위해 서버의 성능 최적화에 주력합니다.
+<br>
 
-3. **OpenAI API 설정**
-   - OpenAI API 키를 발급받습니다.
+## 🌱 Instructions
+> 각 폴더의 README.md를 참고하세요!
+<br>
+
+## :computer: License
+이 프로젝트는 MIT 라이센스를 따릅니다.
