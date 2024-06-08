@@ -1,8 +1,7 @@
 # AI News Thumbnail Webpage - Crawling
 
 ## 프로젝트 개요
-이 프로젝트는 AI 기술을 활용하여 뉴스 헤드라인과 링크를 스크래핑하고, 뉴스 기사의 원문을 요약하여 사용자에게 제공합니다. ~~AWS 서버리스 환경을 이용하여 자동화된 시스템을 구축합니다.~~
-Azure Function apps를 사용하여 자동화된 시스템을 구축합니다.
+이 프로젝트는 AI 기술을 활용하여 뉴스 헤드라인과 링크를 스크래핑하고, 뉴스 기사의 원문을 요약하여 사용자에게 제공합니다. Azure Function apps를 사용하여 자동화된 시스템을 구축합니다.
 
 ## 주요 기능
 1. **뉴스 헤드라인 및 링크 스크래핑**
@@ -19,25 +18,76 @@ Azure Function apps를 사용하여 자동화된 시스템을 구축합니다.
 - **기사 원문 추출**: Trafliatura
 - **요약 생성**: OpenAI API, Langchain
 - **데이터베이스**: Firebase
-- **클라우드 환경**: ~~AWS Lambda, AWS API Gateway~~ Azure Portal, Azure CLI
+- **클라우드 환경**: Azure Portal, Azure CLI
 - **언어**: Python
+
+## 라이브러리 라이선스 정보
+- **azure-functions**
+  - 라이선스: MIT License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://github.com/Azure/azure-functions-python-library/blob/dev/LICENSE)
+
+- **requests**
+  - 라이선스: Apache License 2.0
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://github.com/psf/requests/blob/main/LICENSE)
+
+- **trafilatura**
+  - 라이선스: MIT License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://github.com/adbar/trafilatura/blob/main/LICENSE)
+
+- **firebase_admin**
+  - 라이선스: Apache License 2.0
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://github.com/firebase/firebase-admin-python/blob/master/LICENSE)
+
+- **lxml**
+  - 라이선스: BSD License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://github.com/lxml/lxml/blob/master/LICENSE.txt)
+
+- **BeautifulSoup (bs4)**
+  - 라이선스: MIT License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#license)
+
+- **langchain, langchain-openai, langchain-core**
+  - 라이선스: MIT License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://github.com/hwchase17/langchain/blob/master/LICENSE)
+
+- **json**
+  - 라이선스: JSON License (The Software shall be used for Good, not Evil.)
+  - 재배포: 제한적 가능 (Good, not Evil 조건)
+  - 상업적 이용: 제한적 가능 (Good, not Evil 조건)
+  - [라이선스 내용](http://www.json.org/license.html)
+
+- **openai**
+  - 라이선스: MIT License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 내용](https://github.com/openai/openai-python/blob/main/LICENSE)
 
 ## 설치 및 설정 방법
 ### 사전 요구사항
-~~- AWS 계정~~
 - Azure 계정
-- Firebase 프로젝트(realtime DB)
+- Firebase 프로젝트 (realtime DB)
 - OpenAI API 키
 
 ### 환경 설정
-~~1. **AWS 설정**~~
-   ~~- AWS Lambda와 S3 버킷을 설정합니다.~~
-   ~~- AWS CLI를 설치하고 구성합니다.~~
-   
-1. ** Azure 설정 **
-   - Azure Function App 를 생성하고 Timer Trigger Function app 을 설정합니다.
+1. **Azure 설정**
+   - Azure Function App를 생성하고 Timer Trigger Function app을 설정합니다.
    - Azure CLI, Azure Core Tools를 설치하고 구성합니다.
-   - VScode(IDE) 상에서 Azure CLI 와 Azure Core Tools 등 여러 Extension들을 설치합니다.
+   - VScode(IDE) 상에서 Azure CLI와 Azure Core Tools 등 여러 Extension들을 설치합니다.
+
 2. **Firebase 설정**
    - Firebase 프로젝트를 생성하고, 실시간 데이터베이스를 설정합니다.
    - Firebase Admin SDK를 설정하고, 서비스 계정 키 json 파일을 생성합니다.
