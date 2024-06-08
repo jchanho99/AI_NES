@@ -28,7 +28,7 @@ result_list = []
 
 # Naver News section list
 def crawling(result_list):    
-    section_list = [("politic", "100"), ("economics", "101"), ("social", "102"), ("culture", "103"), ("worlds","104"), ("Tech", "105")]
+    section_list = [("economics", "101"), ("social", "102"), ("culture", "103"), ("worlds","104"), ("Tech", "105")]
     for section, site in section_list:
         page= "https://news.naver.com/section/" 
         page += site
@@ -65,15 +65,14 @@ def dump_result_list(data):
     json_dict = json.loads(json_data)
     return json_dict
 
-## firebase update
+
+# Firebase init
 def initialize_firebase(firebase_admin_key_path, databaseURL):
     if not firebase_admin._apps:
         cred = credentials.Certificate(firebase_admin_key_path)
-        firebase_admin.initialize_app(cred, {'databaseURL': databaseURL})
+        firebase_admin.initialize_app(cred, databaseURL)
 
-# 데이터 업데이트 함수
 def firebase_update(firebase_admin_key_path, databaseURL, timenow, json_dict):
-    # Firebase 초기화 호출
     initialize_firebase(firebase_admin_key_path, databaseURL)
     
     # 데이터베이스 참조 경로 설정 및 데이터 저장
