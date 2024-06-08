@@ -28,7 +28,7 @@ result_list = []
 
 # Naver News section list
 def crawling(result_list):    
-    section_list = [("economics", "101"), ("social", "102"), ("culture", "103"), ("worlds","104"), ("Tech", "105")]
+    section_list = [("경제", "101"), ("사회", "102"), ("문화", "103"), ("세계","104"), ("기술", "105")]
     for section, site in section_list:
         page= "https://news.naver.com/section/" 
         page += site
