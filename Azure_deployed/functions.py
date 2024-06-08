@@ -3,6 +3,7 @@ import json
 import requests 
 import trafilatura
 import datetime
+import logging
 
 from summarization import get_summarization
 import firebase_admin
@@ -19,6 +20,8 @@ def get_news(link):
     origin_news = trafilatura.extract(response)
     if origin_news == None:
         return "Crawling Error : Trafilatura can't scrap the news in HTML"
+    logging.info("trafilatura was make text")
+    
     return origin_news
 
 
@@ -51,6 +54,7 @@ def crawling(result_list):
                 'summary' : get_summarization(get_news(a['href']),kor_prompt_template)
             }
             result_list.append(result)
+    logging.info("Crawling completed")
 
     return result_list
 
@@ -69,6 +73,8 @@ def dump_result_list(data):
 # Firebase init
 def initialize_firebase(firebase_admin_key_path, databaseURL):
     if not firebase_admin._apps:
+        logging.info("initiate firebase admin")
+
         cred = credentials.Certificate(firebase_admin_key_path)
         firebase_admin.initialize_app(cred, databaseURL)
 
@@ -79,3 +85,4 @@ def firebase_update(firebase_admin_key_path, databaseURL, timenow, json_dict):
     db_path = "news_data"
     ref = db.reference(db_path).child(timenow)
     ref.set(json_dict)
+    logging.info("database is updated")

@@ -1,4 +1,5 @@
 import os
+import logging
 
 from keys import OPENAI_API_KEY
 from langchain.chains.llm import LLMChain
@@ -15,4 +16,6 @@ def get_summarization(news, prompt_template):
     llm_chain = LLMChain(llm=llm, prompt=prompt)
     llm_chain = prompt | llm
     result = llm_chain.invoke(inputtext)
+    logging.info("chain invoked successfuly")
+
     return result.content
