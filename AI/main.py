@@ -23,11 +23,11 @@ def run_analysis():
     texts = [translator.translate(i, dest='en').text for i in load_news()]
     sentiment = []
 
-    # 감정 분석 수행
+    # analysis process
     results = pipeline(texts)
 
-    # 결과 출력
-    for text, result in zip(texts, results):
+    # print outputs
+    for result in results:
         if isinstance(result, list):
             for res in result:
                 sentiment.append(res['label'])

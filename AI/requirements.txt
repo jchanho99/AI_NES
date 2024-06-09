@@ -6,3 +6,4 @@ googletrans
 azure-functions
 transformers
 latest
+schedule
