@@ -1,17 +1,16 @@
 # AI-NES(News Emotion Service) Project: AI Guide
 
-### Used Stacks
 
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
-<img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
-<img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
-<img src="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white">
-<img src="https://img.shields.io/badge/azure-61DAFB?style=for-the-badge&logo=azure&logoColor=white">
-<img src="https://img.shields.io/badge/Tensorflow-FF8C00?style=for-the-badge&logo=Tensorflow&logoColor=white">
-<img src="https://img.shields.io/badge/scikitlearn-FF8C00?style=for-the-badge&logo=scikit-learn&logoColor=white">
-<img src="https://img.shields.io/badge/pandas-3776AB?style=for-the-badge&logo=pandas&logoColor=white">
-<img src="https://img.shields.io/badge/FastAPI-9ACD32?style=for-the-badge&logo=FastAPI&logoColor=white">
+## Used Stacks
+
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">: 코드 문서 정리
+
+<img src="https://img.shields.io/badge/VScode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">: 코드 에디터
+
+<img src="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/pandas-3776AB?style=for-the-badge&logo=pandas&logoColor=white"> <img src="https://img.shields.io/badge/Tensorflow-FF8C00?style=for-the-badge&logo=Tensorflow&logoColor=white">  <img src="https://img.shields.io/badge/scikit--learn-FF8C00?style=for-the-badge&logo=scikit-learn&logoColor=white">: 사용 언어 및 라이브러리
+
+<img src="https://img.shields.io/badge/azure-61DAFB?style=for-the-badge&logo=azure&logoColor=white">: 클라우드 서버
+
 
 ## Service Overview
 1. **Firebase Realtime DB에 연결**
@@ -26,7 +25,7 @@
   - 데이터를 JSON 형태로 저장합니다.
 
 
-## To Start
+## indtructions
 ### 0. Need Environment
 - Python v3.9
 - Click to Install Python 3.9 -> <a src=https://www.python.org/downloads/release/python-3918><img src="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"></a>
@@ -50,7 +49,3 @@
   6.   deactivate (if you are done)
   ```
 
-### 2. If you want start server in local
-```bash
-python3 main.py
-```
