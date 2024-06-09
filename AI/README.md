@@ -2,7 +2,6 @@
 
 
 ## Used Stacks
-
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">: 코드 문서 정리
 
 <img src="https://img.shields.io/badge/VScode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">: 코드 에디터
@@ -25,7 +24,7 @@
   - 데이터를 JSON 형태로 저장합니다.
 
 
-## instructions - on local
+## Instructions - on local
 - 실제로는 Azure Function에서 돌아가기에 자동으로 실행된다. 이 부분은 직접 컴퓨터에서 설치, 실행하는 방법을 다룬다.
 ### 0. Need Environment
 - Python v3.9
@@ -46,7 +45,6 @@
   4-2. .\venv\Scripts\activate (on windows powershell)
   5.   pip install -r requirements.txt
   ```
-
 ### 2. Execute 
 - Execute main.py only.
   ```
