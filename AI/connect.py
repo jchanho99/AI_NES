@@ -17,5 +17,6 @@ def init_db(date=None):
     else:
         ref = db.reference(f'news_data/{date}')
 
+    print("Log-in complete")
     return ref
 
