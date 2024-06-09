@@ -28,7 +28,7 @@
 - 실제로는 Azure Function에서 돌아가기에 자동으로 실행된다. 이 부분은 직접 컴퓨터에서 설치, 실행하는 방법을 다룬다.
 ### 0. Need Environment
 - Python v3.9
-  - <a src=https://www.python.org/downloads/release/python-3918>Click to Install Python 3.9</a>
+  - [Click here to Install Python 3.9](https://www.python.org/downloads/release/python-3918)
   - or via commands:
     ```
     sudo yum install python39-pip (on centOS based)
