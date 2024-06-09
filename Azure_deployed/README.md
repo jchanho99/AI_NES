@@ -104,3 +104,7 @@
    - 필요한 키들을 입력합니다 ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase admin json file생성 등
 5. **Azure deploy**
    Azure Function apps 의 timetirgger로 Azure deploy하위의 파일들을 가상환경자체로 deploy 시킵니다. function_apps.py 가 timetrigger파일입니다! (가상환경을 activate하고, 터미널 상에서 azure에 로그인 합니다. 리소스 그룹, 구독 생성 등등은 생략합니다.)
+6. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
+   - 아래 노션을 참고하여 Azure venv를 만들고, 해당 venv폴더를 deploy하면 된다.(만약 Azure를 사용한 적이 있고, 리소스 그룹 및 어카운트같은 것을 설정한 적이 있다면, 17번을 참고하면된다.)
+   https://www.notion.so/Azure-b4b4ad55e6974931949b9a9846e7e4dc?pvs=4
+   
