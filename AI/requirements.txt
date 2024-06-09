@@ -2,8 +2,10 @@ firebase-admin
 tensorflow
 pandas
 scikit-learn
-googletrans
+googletrans==4.0.0-rc1
 azure-functions
 transformers
-latest
 schedule
+pyparsing
+latest
+tf-keras
