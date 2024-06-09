@@ -25,17 +25,17 @@
   - 데이터를 JSON 형태로 저장합니다.
 
 
-## indtructions
+## instructions - on local
+- 실제로는 Azure Function에서 돌아가기에 자동으로 실행된다. 이 부분은 직접 컴퓨터에서 설치, 실행하는 방법을 다룬다.
 ### 0. Need Environment
 - Python v3.9
-- Click to Install Python 3.9 -> <a src=https://www.python.org/downloads/release/python-3918><img src="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"></a>
-- or via commands:
-  ```
-  sudo yum install python39-pip (on centOS based)
-  sudo apt install python3.9 (on Ubuntu)
-  brew install python3.9 (on macOS)
-  ```
-
+  - Click to Install Python 3.9 -> <a src=https://www.python.org/downloads/release/python-3918><img src="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"></a>
+  - or via commands:
+    ```
+    sudo yum install python39-pip (on centOS based)
+    sudo apt install python3.9 (on Ubuntu)
+    brew install python3.9 (on macOS)
+    ```
 ### 1. Set Environment
 - Execute as venv.
   ```bash
@@ -45,8 +45,12 @@
   4-1. source .venv/bin/activate (on macOS, linux)
   4-2. .\venv\Scripts\activate (on windows powershell)
   5.   pip install -r requirements.txt
-  
-  6.   deactivate (if you are done)
+  ```
+
+### 2. Execute 
+- Execute main.py only.
+  ```
+  python3 main.py
   ```
 
 ## Library License
