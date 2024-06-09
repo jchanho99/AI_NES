@@ -94,3 +94,12 @@
 
 3. **OpenAI API 설정**
    - OpenAI API 키를 발급받습니다.
+  
+### 실행
+1. **Azure 설치**
+      - Azure설치가 정상적으로 진행되었다면 두가지 경로로 접근할 수 있습니다(Azure    Portal(web), Azure CLI (local)
+2. **가상환경 설치**
+   - Python 3.11 버전으로 가상환경을 설치하고 git에 있는 파일들을 다운로드 받습니다.
+3. **Key 입력**
+   - 필요한 키들을 입력합니다 ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase admin json file생성 등
+5. **Azure deploy**
