@@ -36,6 +36,7 @@
     brew install python3.9 (on macOS)
     ```
 ### 1. Set Environment
+
 - Execute as venv.
   ```bash
   1.   git clone https://github.com/jchanho99/AI_NES
