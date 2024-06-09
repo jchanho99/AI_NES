@@ -33,7 +33,6 @@ def run_analysis():
                 sentiment.append(res['label'])
         else:
             sentiment.append(result['label'])
-        print()
 
     save_sentiment(sentiment)
     print('Done!')
