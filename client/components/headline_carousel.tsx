@@ -3,7 +3,7 @@ import { Carousel, CustomFlowbiteTheme } from "flowbite-react";
 const articleTheme: CustomFlowbiteTheme["carousel"] =
 {
     "root": {
-        "base": "px-12 pb-10 bg-gray-100 relative h-full w-full rounded-xl",
+        "base": "px-12 bg-gray-100 relative h-full w-full rounded-xl",
         "leftControl": "absolute left-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none",
         "rightControl": "absolute right-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none"
     },
@@ -16,10 +16,10 @@ const articleTheme: CustomFlowbiteTheme["carousel"] =
         "wrapper": "absolute bottom-5 left-1/2 flex -translate-x-1/2 space-x-3"
     },
     "item": {
-        "base": "absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2",
+        "base": "absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2 cursor-pointer",
         "wrapper": {
-            "off": "w-full flex-shrink-0 transform cursor-default snap-center",
-            "on": "w-full flex-shrink-0 transform cursor-pointer snap-center"
+            "off": "w-full flex-shrink-0 transform snap-center",
+            "on": "w-full flex-shrink-0 transform snap-center"
         }
     },
     "control": {

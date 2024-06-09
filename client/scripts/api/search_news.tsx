@@ -1,6 +1,7 @@
 import axios from "axios";
 
-interface News {
+export interface News {
+    id?: number;
     title: string;
     originallink: string;
     link: string;
@@ -8,7 +9,8 @@ interface News {
     pubDate: Date;
 }
 
-interface SearchResponse {
+interface SearchResult {
+    status?: number;
     lastBuildDate?: Date;
     total?: number;
     start?: number;
@@ -16,21 +18,7 @@ interface SearchResponse {
     items?: News[];
 }
 
-interface SearchResult {
-    status: number;
-    result?: string;
-}
-
-function formatNews(news: News) {
-    return `
-    ${news.title}</br>
-    ${news.pubDate}</br>
-    <a href=${news.link}>링크</a></br>
-    ${news.description}
-    `;
-}
-
-export default async function SearchNews(query: string): Promise<SearchResult> {
+async function SearchNews(query: string): Promise<SearchResult> {
     const storage = JSON.parse(window.localStorage.authStorage);
     const token = storage.state.jwt_token;
     if (!token) {
@@ -41,7 +29,7 @@ export default async function SearchNews(query: string): Promise<SearchResult> {
             { chatbot_query: query },
             { headers: { Authorization: `Bearer ${token}` } }
         );
-        const response = await axios.post<SearchResponse>(
+        const response = await axios.post<SearchResult>(
             "/service/search/news",
             { query: query },
             { headers: { Authorization: `Bearer ${token}` } }
@@ -52,13 +40,17 @@ export default async function SearchNews(query: string): Promise<SearchResult> {
         // Debug
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        const searchResult = {
-            status: response.status,
-            result: formatNews(response.data.items[0]),
-        };
+        const searchResult = response.data;
+        searchResult.status = response.status;
+        let index = 0;
+        for (const news of searchResult.items as News[]){
+            news.id = index++;
+        }
         return searchResult;
     } catch (err) {
         console.error(err);
         return { status: 500 };
     }
 }
+
+export { SearchNews };

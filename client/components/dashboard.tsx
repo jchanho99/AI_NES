@@ -1,7 +1,7 @@
 import { ArrowRightCircleIcon } from "@heroicons/react/20/solid"
 
 const links = [
-    { name: '기사 모아보기', href: '#headline' },
+    { name: '기사 모아보기', href: './list' },
     { name: '개발 문서', href: '#' },
     { name: '팀 소개', href: './about' },
     { name: 'Github', href: 'https://github.com/jchanho99/AI_NES' },
