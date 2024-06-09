@@ -49,3 +49,39 @@
   6.   deactivate (if you are done)
   ```
 
+## 라이브러리 라이선스 정보
+- **azure-functions**
+  - 라이선스: MIT License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 바로가기](https://github.com/Azure/azure-functions-python-library/blob/dev/LICENSE)
+
+- **googletrans**
+  - 라이선스: MIT License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 바로가기](https://github.com/ssut/py-googletrans/blob/master/LICENSE)
+
+- **firebase_admin**
+  - 라이선스: Apache License 2.0
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 바로가기](https://github.com/firebase/firebase-admin-python/blob/master/LICENSE)
+
+- **tensorflow**
+  - 라이선스: Apache License 2.0
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 바로가기](https://github.com/tensorflow/tensorflow/blob/master/LICENSE)
+
+- **transformers**
+  - 라이선스: Apache License 2.0
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 바로가기](https://github.com/huggingface/transformers/blob/main/LICENSE)
+
+- **pandas**
+  - 라이선스: BSD 3-Clause License
+  - 재배포: 가능
+  - 상업적 이용: 가능
+  - [라이선스 바로가기](https://github.com/pandas-dev/pandas/blob/main/LICENSE)
