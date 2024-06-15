@@ -150,16 +150,49 @@
    - 다음 function trigger를 설정하라는 내용이 나온다. (serverless환경에서 일정 시간마다 실행할 예정이라 Timer trigger로 설정하였고 나중에 function들을 추가할수도, 나중에 바꿔서 설정할수도 있다.)
    - Function name 설정
    - cron 식 해당 function을 언제 실행할 것인지 Azure portal에서 설정한 region 기준 시간대로 지정되어 있으니 주의 할것.  (< 초 분 시 일 월 연 > - 부등호는 제외. / * 등등 많은 기호로 응용하여 작성할 수 있다. 본 프로젝트는 매일 21시마다 실행할 예정이라 0 0 21 * * * 로 설정.)
-   - 해당 과정이 모두 끝났다면, 5. 에서 설정한 폴더에 가상환경이 세팅된다.
+   - 해당 과정이 모두 끝났다면, 5. 에서 설정한 폴더에 다음과 같이 가상환경이 세팅된다.(timer trigger로 생성하였다면 추가적으로 function_app.py 파일이 추가되어 있어야 한다.)
+<img width="243" alt="스크린샷 2024-06-02 오전 12 40 38" src="https://github.com/jchanho99/AI_NES/assets/71568851/995d20f6-f5b0-45a8-b5ef-a16650c06d54">
 
-   **가상환경 설치**
-   - Python 3.11 버전으로 가상환경을 설치하고 crawling 에 있는 파일들을 다운로드 받습니다.
+7. **가상환경에 파일 다운로드**
+   - 해당 가상환경 폴더에 crawling에 있는 파일들을 다운로드 받는다. (이때 function_app.py를 덮어 쓰도록 한다.)
+   - function_app.py 는 아래 이미지와 같은 형식을 띠고 있으며 사전에 입력한 크론식은 변경이 가능하고, timer_trigger 라는 함수 안에 내가 실행하기 원하는 코드를 작성하여 넣으면 된다.(해당 프로젝트를 build 하고자 한다면 덮어쓰면 된다.)
+   <img width="702" alt="스크린샷 2024-06-02 오전 12 42 19" src="https://github.com/jchanho99/AI_NES/assets/71568851/5fcc73dc-3862-4ef1-be6e-9d492bd29080">
+
 8. **Key 입력**
-   - 필요한 키들을 입력합니다 ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase admin json file생성 등
+   - 필요한 키들을 입력하고 firebase adminsdk의 json파일을 생성한다. ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase adminsdk 의 json file생성 등
+   - 실행에 필요한 라이브러리 들은 모두 requirements.txt에 작성되어 git에 올라가 있으니 그대로 넣어서 사용하면 된다.
+9. **Local test**
+   - 해당 프로젝트를 로컬에서 테스트 해볼 수 있다. 먼저 터미널에서 해당 프로젝트의 로컬 위치로 들어가 venv를 활성화 시킨다.(로컬 테스트를 하려면 requirements.txt에 있는 라이브러리들이 설치되어 있는지 확인해야 한다.)
+     ```
+     source .venv/bin/activate
+     ```
+   - 가상환경 활성화 다음 터미널에서 func 커맨드를 이용해 실행해 준다.
+     ```
+     func start
+     ```
 9. **Azure deploy**
-   - Azure Function apps 의 timer tirgger로 Azure deploy하위의 파일들을 가상환경자체로 deploy 시킵니다. function_apps.py 가 timetrigger파일입니다! (가상환경을 activate하고, 터미널 상에서 azure에 로그인 합니다. 리소스 그룹, 구독 생성 등등은 개인이 생성하는 것 이므로 생략합니다.)
-   - Timetrigger
+   - Azure Function apps 의 timer tirgger로 Azure deploy하위의 파일들을 가상환경폴더 자체를 deploy 시킨다.
+   - 가상환경을 activate하고, 터미널 상에서 azure에 로그인 합니다. 리소스 그룹, 구독 생성 등등은 개인이 생성하는 것 이므로 각자 필요한 이름으로 생성하면 된다.
+   - venv 가 활성화 된 상태에서 az login
+     ```
+     az login
+     ```
+   - 기존에 했던 방식처럼 로그인 해주고, 로그인 완료 후 리소스 그룹을 생성합니다(az group create --name "리소스 그룹명" --location "Azure service 지역명"
+     ```
+     az group create --name myResourceGroup --location eastus
+     ```
+   - storage account 를 생성합니다. az storage account create --name "storage account이름" --location "지역명" --resource-group "리소스그룹명" --sku Standard_LRS
+     ```
+     az storage account create --name myStorageacc --location eastus --resource-group myResourceGroup --sku Standard_LRS
+     ```
+   - az function 앱을 Azure Portal에 생성합니다. az functionapp create --"크레딧 소비 plan명" --name "함수이름" --os-type "Azure에서사용할os type" --resource-group "리소스 그룹명" --runtime "런타임" --storage-account "storage account"
+     ```
+     az functionapp create --consumption-plan-location westus --name crawlingoss --os-type linux --resource-group myResourceGroup --runtime python --storage-account myStorageacc
+     ```
+   - Azure에 배포합니다. 해당 위치의 프로젝트를 Azure에 올립니다. func azure functionapp publish "함수명"
+     ```
+     func azure functionapp publish crawlingoss
+     ```
 10. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
-   - 아래 노션을 참고하여 Azure venv를 만들고, 해당 venv폴더를 deploy하면 된다.(만약 Azure를 사용한 적이 있고, 리소스 그룹 및 어카운트같은 것을 설정한 적이 있다면, 17번을 참고하면된다.)
    https://www.notion.so/Azure-b4b4ad55e6974931949b9a9846e7e4dc?pvs=4
    
