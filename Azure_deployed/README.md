@@ -97,24 +97,54 @@
   
 ### 실행
 0. **Test.ipynb 노트북 이용**
-      - 해당 노트북파일을 이용하여, 간단히 function들을 실행해 볼 수 있다. function 들을 독립적으로 호출해 실행해 각 함수들이 어떤것을 리턴하는지 직접적으로 볼 수 있다(단, API Key나 Firebase realtimeDB에 관한 설정이 되어 있을 것).
+      - 해당 노트북파일을 이용하여, 간단히 Crawling에 사용되는 함수들을 실행해 볼 수 있다. 각 함수들은 독립적으로 호출이 가능하며, 이를 직접 실행해 각 함수들이 어떤것을 리턴하는지 직접적으로 볼 수 있다(단, API Key나 Firebase realtimeDB에 관한 설정이 되어 있을 것).
       - 아래에서 다루는 내용들은 crawling 폴더 내에 있는 파일들을 Azure의 Timer trigger를 이용하여 배포한 것이다.  
 1. **Azure CLI 설치**
-   
-      a. Azure CLI를 Mac 환경에서 설치하려면 Homebrew가 필요하다.
+      - MacOS에서 VScode 를 사용하는 local environment 기준으로 이루어 집니다.
+      - Homebrew 설치(아래 커맨드를 터미널에서 입력하고, 나오는 homebrew의 지시를 확인하고 따를 것.)
    ```
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
-
-      - Azure CLI 설치가 정상적으로 진행되었다면 두가지 경로로 접근할 수 있습니다(Azure Portal(web), Azure CLI (local)
-3. **가상환경 설치**
+      - 터미널에서 다음과 같이 Azure CLI 설치와 homebrew를 최신으로 설치한다.
+        ```
+        $ brew update && brew install azure-cli
+        ```
+      - Azure CLI 설치가 정상적으로 진행되었다면 두가지 경로로 Azure를 사용할 수 있습니다(Azure Portal(web), Azure CLI(local)
+2. **Azure CLI 실행**
+      - Azure CLI가 제대로 설치가 되었다면 az 커맨드 명령이 정상적으로 작동할 것이다. 다음과 같이 터미널에서 Azure 로그인을 진행할 수 있다. 
+   ```
+   $ az -login
+   ```
+      - 위와같은 커맨드 실행 시 Azure 서비스 로그인 창이 AzurePortal을 통하여 뜰 것이다. 로그인해주고, 가입이 안되어 있다면 Azure Portal로 가서 회원가입을 해야한다(이때 구독설정 및 카드등록 등의 절차를 마쳐야 한다).
+      - Azure 서비스 로그인을 Azure Portal에서 마치고 나면, 터미널창에 다음과 같은 구독 선택이 나오게 된다. 본인이 원하는 Azure 구독을 선택한다.
+      - 그렇게 되면 터미널에서 Azure Portal에서 제공하는 서비스를 커맨드로 작동시킬 수 있다.
+        
+3. **Azure functions core tools 설치**
+      - homebrew로 간단하게 설치할 수 있다.
+        ```
+        brew tap azure/functions
+        brew install azure-functions-core-tools@4
+        ```
+      - 이때 func의 경로설정이 제대로 되었는지 확인해야한다
+        ```
+        'export PATH="/usr/local/opt/azure-functions-core-tools@4/bin:$PATH"' >> ~/.zshrc
+        source ~/.zshrc
+        ```
+      - Azure function core tool을 정상적으로 설치하였다면 터미널에서 Azure function과 관련된 func 커맨드를 사용할 수 있다.
+        ```
+         func start
+        ```
+      - 해당 커맨드로 Azure func을 실행할 수 있다.
+4. **
+   
+6. **가상환경 설치**
    - Python 3.11 버전으로 가상환경을 설치하고 crawling 에 있는 파일들을 다운로드 받습니다.
-4. **Key 입력**
+7. **Key 입력**
    - 필요한 키들을 입력합니다 ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase admin json file생성 등
-5. **Azure deploy**
+8. **Azure deploy**
    - Azure Function apps 의 timer tirgger로 Azure deploy하위의 파일들을 가상환경자체로 deploy 시킵니다. function_apps.py 가 timetrigger파일입니다! (가상환경을 activate하고, 터미널 상에서 azure에 로그인 합니다. 리소스 그룹, 구독 생성 등등은 개인이 생성하는 것 이므로 생략합니다.)
    - Timetrigger
-6. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
+9. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
    - 아래 노션을 참고하여 Azure venv를 만들고, 해당 venv폴더를 deploy하면 된다.(만약 Azure를 사용한 적이 있고, 리소스 그룹 및 어카운트같은 것을 설정한 적이 있다면, 17번을 참고하면된다.)
    https://www.notion.so/Azure-b4b4ad55e6974931949b9a9846e7e4dc?pvs=4
    
