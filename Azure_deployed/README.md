@@ -134,7 +134,7 @@
         ```
          func start
         ```
-      - 해당 커맨드로 Azure func을 실행할 수 있다.
+      - 해당 커맨드로 Azure func을 실행할 수 있다. (해당 커맨드까지 정상적으로 실행되어야, 제대로 설치된것.)
 4. **VScode**
       - vscode를 실행하고 다음 Extension들을 추가한다(Azure Account, Azure App Service, Azure Container Apps, Azure Database, Azure Developer CLI, Azure Functions, Azure resources).
 5. **VScode에서 Azure실행**
