@@ -102,7 +102,9 @@
 1. **Azure CLI 설치**
    
       a. Azure CLI를 Mac 환경에서 설치하려면 Homebrew가 필요하다.
-      b.```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
+   ```
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
 
       - Azure CLI 설치가 정상적으로 진행되었다면 두가지 경로로 접근할 수 있습니다(Azure Portal(web), Azure CLI (local)
 3. **가상환경 설치**
