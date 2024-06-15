@@ -96,15 +96,19 @@
    - OpenAI API 키를 발급받습니다.
   
 ### 실행
+0. **Test.ipynb 노트북 이용**
+      - 해당 노트북파일을 이용하여, 간단히 function들을 실행해 볼 수 있다. function 들을 독립적으로 호출해 실행해 각 함수들이 어떤것을 리턴하는지 직접적으로 볼 수 있다(단, API Key나 Firebase realtimeDB에 관한 설정이 되어 있을 것).
+      - 아래에서 다루는 내용들은 crawling 폴더 내에 있는 파일들을 Azure의 Timer trigger를 이용하여 배포한 것이다.  
 1. **Azure 설치**
-      - Azure설치가 정상적으로 진행되었다면 두가지 경로로 접근할 수 있습니다(Azure    Portal(web), Azure CLI (local)
+      - Azure CLI 설치가 정상적으로 진행되었다면 두가지 경로로 접근할 수 있습니다(Azure Portal(web), Azure CLI (local)
 2. **가상환경 설치**
-   - Python 3.11 버전으로 가상환경을 설치하고 git에 있는 파일들을 다운로드 받습니다.
+   - Python 3.11 버전으로 가상환경을 설치하고 crawling 에 있는 파일들을 다운로드 받습니다.
 3. **Key 입력**
    - 필요한 키들을 입력합니다 ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase admin json file생성 등
-5. **Azure deploy**
-   Azure Function apps 의 timetirgger로 Azure deploy하위의 파일들을 가상환경자체로 deploy 시킵니다. function_apps.py 가 timetrigger파일입니다! (가상환경을 activate하고, 터미널 상에서 azure에 로그인 합니다. 리소스 그룹, 구독 생성 등등은 생략합니다.)
-6. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
+4. **Azure deploy**
+   - Azure Function apps 의 timer tirgger로 Azure deploy하위의 파일들을 가상환경자체로 deploy 시킵니다. function_apps.py 가 timetrigger파일입니다! (가상환경을 activate하고, 터미널 상에서 azure에 로그인 합니다. 리소스 그룹, 구독 생성 등등은 개인이 생성하는 것 이므로 생략합니다.)
+   - Timetrigger
+5. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
    - 아래 노션을 참고하여 Azure venv를 만들고, 해당 venv폴더를 deploy하면 된다.(만약 Azure를 사용한 적이 있고, 리소스 그룹 및 어카운트같은 것을 설정한 적이 있다면, 17번을 참고하면된다.)
    https://www.notion.so/Azure-b4b4ad55e6974931949b9a9846e7e4dc?pvs=4
    
