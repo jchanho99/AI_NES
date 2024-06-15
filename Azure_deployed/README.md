@@ -146,7 +146,13 @@
       - venv 설정(후에 해당 venv의 설정 및 내용들이 통째로 Azure에 배포된다.)
    <img width="956" alt="스크린샷 2024-06-02 오전 12 35 04" src="https://github.com/jchanho99/AI_NES/assets/71568851/eaf79f7b-6828-4def-b480-999fdf3e66de">
 
-7. **가상환경 설치**
+6. **function trigger**
+   - 다음 function trigger를 설정하라는 내용이 나온다. (serverless환경에서 일정 시간마다 실행할 예정이라 Timer trigger로 설정하였고 나중에 function들을 추가할수도, 나중에 바꿔서 설정할수도 있다.)
+   - Function name 설정
+   - cron 식 해당 function을 언제 실행할 것인지 Azure portal에서 설정한 region 기준 시간대로 지정되어 있으니 주의 할것.  (< 초 분 시 일 월 연 > - 부등호는 제외. / * 등등 많은 기호로 응용하여 작성할 수 있다. 본 프로젝트는 매일 21시마다 실행할 예정이라 0 0 21 * * * 로 설정.)
+   - 해당 과정이 모두 끝났다면, 5. 에서 설정한 폴더에 가상환경이 세팅된다.
+
+   **가상환경 설치**
    - Python 3.11 버전으로 가상환경을 설치하고 crawling 에 있는 파일들을 다운로드 받습니다.
 8. **Key 입력**
    - 필요한 키들을 입력합니다 ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase admin json file생성 등
