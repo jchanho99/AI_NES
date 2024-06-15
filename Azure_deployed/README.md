@@ -135,16 +135,25 @@
          func start
         ```
       - 해당 커맨드로 Azure func을 실행할 수 있다.
-4. **
-   
-6. **가상환경 설치**
+4. **VScode**
+      - vscode를 실행하고 다음 Extension들을 추가한다(Azure Account, Azure App Service, Azure Container Apps, Azure Database, Azure Developer CLI, Azure Functions, Azure resources).
+5. **VScode에서 Azure실행**
+      - VScode의 사이드바에 Azure가 생성되었다면 Azure 탭에 들어가서 Create New Project -> Browse( 가상환경 프로젝트 폴더로 사용할 폴더 생성 혹은 경로설정)
+   <img width="998" alt="스크린샷 2024-06-02 오전 12 31 07" src="https://github.com/jchanho99/AI_NES/assets/71568851/32dbb6e6-9af3-4184-b711-efec4589d659">
+      - 가상환경에서 사용할 언어 설정
+   <img width="880" alt="스크린샷 2024-06-02 오전 12 33 06" src="https://github.com/jchanho99/AI_NES/assets/71568851/b3f08eb7-2908-48c3-9d35-1bbf176e5218">
+      - Programming model 설정<img width="857" alt="스크린샷 2024-06-02 오전 12 33 51" src="https://github.com/jchanho99/AI_NES/assets/71568851/87f8a124-e98c-4f55-a9c4-b9fa19fff620">
+      - venv 설정(후에 해당 venv의 설정 및 내용들이 통째로 Azure에 배포된다.)
+   <img width="956" alt="스크린샷 2024-06-02 오전 12 35 04" src="https://github.com/jchanho99/AI_NES/assets/71568851/eaf79f7b-6828-4def-b480-999fdf3e66de">
+
+7. **가상환경 설치**
    - Python 3.11 버전으로 가상환경을 설치하고 crawling 에 있는 파일들을 다운로드 받습니다.
-7. **Key 입력**
+8. **Key 입력**
    - 필요한 키들을 입력합니다 ex) keys.py 내부에 있는 Realtime database url 혹은 openai api key, firebase admin json file생성 등
-8. **Azure deploy**
+9. **Azure deploy**
    - Azure Function apps 의 timer tirgger로 Azure deploy하위의 파일들을 가상환경자체로 deploy 시킵니다. function_apps.py 가 timetrigger파일입니다! (가상환경을 activate하고, 터미널 상에서 azure에 로그인 합니다. 리소스 그룹, 구독 생성 등등은 개인이 생성하는 것 이므로 생략합니다.)
    - Timetrigger
-9. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
+10. **Mac OS환경 혹은 Azure 실행에 문제가 있을때 아래 노션 참고**
    - 아래 노션을 참고하여 Azure venv를 만들고, 해당 venv폴더를 deploy하면 된다.(만약 Azure를 사용한 적이 있고, 리소스 그룹 및 어카운트같은 것을 설정한 적이 있다면, 17번을 참고하면된다.)
    https://www.notion.so/Azure-b4b4ad55e6974931949b9a9846e7e4dc?pvs=4
    
