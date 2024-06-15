@@ -100,9 +100,9 @@
       - 해당 노트북파일을 이용하여, 간단히 function들을 실행해 볼 수 있다. function 들을 독립적으로 호출해 실행해 각 함수들이 어떤것을 리턴하는지 직접적으로 볼 수 있다(단, API Key나 Firebase realtimeDB에 관한 설정이 되어 있을 것).
       - 아래에서 다루는 내용들은 crawling 폴더 내에 있는 파일들을 Azure의 Timer trigger를 이용하여 배포한 것이다.  
 1. **Azure CLI 설치**
-   a. Azure CLI를 Mac 환경에서 설치하려면 Homebrew가 필요하다.
-   b.
-   `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+   
+      a. Azure CLI를 Mac 환경에서 설치하려면 Homebrew가 필요하다.
+      b.```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
 
       - Azure CLI 설치가 정상적으로 진행되었다면 두가지 경로로 접근할 수 있습니다(Azure Portal(web), Azure CLI (local)
 3. **가상환경 설치**
