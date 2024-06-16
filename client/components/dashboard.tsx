@@ -1,10 +1,10 @@
 import { ArrowRightCircleIcon } from "@heroicons/react/20/solid"
 
 const links = [
-    { name: '기사 모아보기', href: '#headline' },
-    { name: '개발 문서', href: '#' },
+    { name: '기사 모아보기', href: './list' },
     { name: '팀 소개', href: './about' },
-    { name: 'Github', href: 'https://github.com/jchanho99/AI_NES' },
+    { name: 'Notion', href: 'https://www.notion.so/48c878dfb8bb46a794824a4c8c0af179?v=4ff98628bf51488d8c8d9152f5378d14&pvs=4' },
+    { name: 'GitHub', href: 'https://github.com/jchanho99/AI_NES' },
 ]
 
 export default function Dashboard() {
@@ -12,7 +12,7 @@ export default function Dashboard() {
         <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
             <img
                 src="./images/bg_dashboard.jpg"
-                alt=""
+                alt="Dashboard Background"
                 className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center opacity-10"
             />
             <div

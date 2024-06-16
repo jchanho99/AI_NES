@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import LoginModal from "./login_modal";
 import classNames from 'classnames'
 import useAuthStore from '@/scripts/auth_store'
-import { KakaoLogout, NativeLogout } from '@/scripts/api/logout'
+import { KakaoLogout } from '@/scripts/api/logout'
 
 export default function Navbar() {
   const currentPath = usePathname();
@@ -27,9 +27,10 @@ export default function Navbar() {
         result = await KakaoLogout(window.localStorage.kakaoToken as string);
         break;
       case "google":
+        result = true;
         break;
       case "native":
-        result = await NativeLogout(id as string);
+        result = true;
         break;
       default:
         break;
@@ -42,7 +43,7 @@ export default function Navbar() {
   }
 
   return (
-    <Disclosure as="nav" className={navigation[0].current ? "absolute w-full z-50" : "bg-gray-800"}>
+    <Disclosure as="nav" className={navigation[0].current ? "absolute w-full z-10" : ""}>
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

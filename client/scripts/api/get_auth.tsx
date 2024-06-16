@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, getIdToken, signInWithPopup } from "firebase/auth";
 import { FirebaseAuth } from "../config_firebase";
 import axios from "axios";
 
@@ -12,7 +12,6 @@ interface AuthResult {
     jwt_token?: string;
     id?: string;
     provider?: string;
-    error?: string;
 }
 
 // 보류
@@ -51,17 +50,17 @@ async function KakaoAuth(code: string): Promise<AuthResult> {
         */
 
         // 보안 정책 문제 검토 필요
-		
-		// Debug
+
+        // Debug
         console.log(code);
         // 인가 코드로 카카오 토큰 요청
-        const tokenResponse = await axios.post<KakaoToken>("/service/auth/getToken", { auth_code : code });
+        const tokenResponse = await axios.post<KakaoToken>("/service/auth/getToken", { auth_code: code });
         const kakaoToken = tokenResponse.data;
         const token = kakaoToken.access_token;
-        
+
         //window.localStorage.kakaoToken = kakaoToken.access_token;
         if (tokenResponse.status != 201) {
-			console.log(tokenResponse);
+            console.log(tokenResponse);
             return { status: tokenResponse.status };
         }
 
@@ -71,7 +70,7 @@ async function KakaoAuth(code: string): Promise<AuthResult> {
         // Debug
         // window.localStorage.kakaoUser = JSON.stringify(kakaoUser);
         if (userResponse.status != 201) {
-			console.log(userResponse);
+            console.log(userResponse);
             return { status: userResponse.status };
         }
 
@@ -85,7 +84,16 @@ async function KakaoAuth(code: string): Promise<AuthResult> {
         return authResult;
     } catch (err) {
         console.error(err);
-        return { status: 500, error: JSON.stringify(err) };
+        if (axios.isAxiosError(err)) {
+            return {
+                status: err.response?.status as number
+            };
+        }
+        else {
+            return {
+                status: 500
+            };
+        }
     }
 }
 
@@ -93,20 +101,40 @@ async function GoogleAuth(): Promise<AuthResult> {
     const provider = new GoogleAuthProvider();
     try {
         const data = await signInWithPopup(FirebaseAuth, provider);
+        const token = await data.user.getIdToken();
         // Debug
-        console.log(data);
+        // console.log(data);
 
-        // 백엔드로부터 auth 얻는 코드 필요
+        const response = await axios.post<string>("service/auth/save", {
+            id: data.user.uid,
+            email: data.user.email,
+            token: token
+        })
+
+        if (response.status != 201) {
+            console.log(response);
+            return { status: response.status };
+        }
+
         const authResult: AuthResult = {
             status: 201,
-            jwt_token: "sample_token",
-            id: "sample_id",
+            jwt_token: response.data,
+            id: data.user.uid,
             provider: "google"
         }
         return authResult;
     } catch (err) {
         console.error(err);
-        return { status: 500, error: JSON.stringify(err) };
+        if (axios.isAxiosError(err)) {
+            return {
+                status: err.response?.status as number
+            };
+        }
+        else {
+            return {
+                status: 500
+            };
+        }
     }
 }
 
@@ -114,25 +142,32 @@ async function NativeAuth(authRequest: AuthRequest): Promise<AuthResult> {
     try {
         // Debug
         // await new Promise(resolve => setTimeout(resolve, 4000));
-        console.log(authRequest);
 
-        const response = await axios.post<AuthResult>("/service/auth/login", authRequest);
-        if (response.status != 201) {
-			console.log(response);
+        const response = await axios.post<string>("/service/auth/login", authRequest);
+        if (response.status != 201 || !response.data) {
+            console.log(response);
             return { status: response.status };
         }
 
         // 인증 결과 반환
-        const authResult: AuthResult = {
+        return {
             status: 201,
-            jwt_token: response.data.jwt_token,
-            id: response.data.id,
+            jwt_token: response.data,
+            id: authRequest.id,
             provider: "native"
-        }
-        return authResult;
+        };
     } catch (err) {
         console.error(err);
-        return { status: 500, error: JSON.stringify(err) };
+        if (axios.isAxiosError(err)) {
+            return {
+                status: err.response?.status as number
+            };
+        }
+        else {
+            return {
+                status: 500
+            };
+        }
     }
 }
 

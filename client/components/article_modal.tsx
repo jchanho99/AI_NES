@@ -4,14 +4,15 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import ArticlePage from './article'
+import { Article } from '@/scripts/api/get_articles'
 
 interface ArticleModalProps {
-  articleId: number;
+  article: Article
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ArticleModal: React.FC<ArticleModalProps> = ({ articleId, open, setOpen }) => {
+const ArticleModal: React.FC<ArticleModalProps> = ({ article, open, setOpen }) => {
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -40,7 +41,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ articleId, open, setOpen })
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
-                <div className="absolute right-0 top-0 p-4">
+                <div className="absolute right-0 top-0 p-2 lg:p-4">
                   <button
                     type="button"
                     className="rounded-md text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-white"
@@ -50,7 +51,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ articleId, open, setOpen })
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-                <ArticlePage articleId={articleId}/>
+                <ArticlePage article={article} />
               </Dialog.Panel>
             </Transition.Child>
           </div>
