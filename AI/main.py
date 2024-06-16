@@ -1,4 +1,3 @@
-import tensorflow as tf
 from googletrans import Translator
 from transformers import TextClassificationPipeline
 from data_preprocessing import load_news, save_sentiment

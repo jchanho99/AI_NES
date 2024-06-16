@@ -35,8 +35,7 @@
     sudo apt install python3.9 (on Ubuntu)
     brew install python3.9 (on macOS)
     ```
-### 1. Set Environment
-
+### 1. Set Environment and Essential file
 - Execute as venv.
   ```bash
   1.   git clone https://github.com/jchanho99/AI_NES
@@ -46,6 +45,15 @@
   4-2. .\venv\Scripts\activate (on windows powershell)
   5.   pip install -r requirements.txt
   ```
+
+- get Access key from Firebase Realtime DB.
+  1. Firebase에 접속한다.
+  2. 새 프로젝트를 만든다.
+  3. Realtime Database를 선택한 후 개설한다. 이때 나오는 보안규칙은 우선 초기 설정 그대로 진행한다.
+  4. 프로젝트 개요 - 프로젝트 설정으로 들어간다.
+  5. "서비스 계정" 탭에서 "새 비공개 키 생성"을 클릭한다.
+  6. 생성한 키를 AI 폴더의 json 폴더 안에 "AccountKey.json" 이름으로 저장한다.
+
 ### 2. Execute 
 - Execute main.py only.
   ```
