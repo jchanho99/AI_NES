@@ -1,9 +1,14 @@
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
 firebase-admin
 tensorflow
 pandas
 scikit-learn
-googletrans
+googletrans==4.0.0-rc1
 azure-functions
 transformers
+pyparsing
 latest
-schedule
+tf-keras

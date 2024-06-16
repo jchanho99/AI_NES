@@ -1,4 +1,3 @@
-import tensorflow as tf
 from googletrans import Translator
 from transformers import TextClassificationPipeline
 from data_preprocessing import load_news, save_sentiment
@@ -33,7 +32,6 @@ def run_analysis():
                 sentiment.append(res['label'])
         else:
             sentiment.append(result['label'])
-        print()
 
     save_sentiment(sentiment)
     print('Done!')

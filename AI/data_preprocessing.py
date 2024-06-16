@@ -5,7 +5,7 @@ from connect import init_db
 # Connect to db
 now = datetime.datetime.now().date()
 date = now.strftime("%Y_%m_%d")
-ref = init_db("2024_06_08")
+ref = init_db("date")
 
 def load_news():
     # Collecting all news data from db
