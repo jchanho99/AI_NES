@@ -15,32 +15,40 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isDuplicatedID, setIsDuplicatedID] = useState(false);
+  const [isAgreeRequired, setIsAgreeRequired] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { login } = useAuthStore();
   const router = useRouter();
+
+  const initState = () =>{
+    setIsLoading(true);
+    setIsDuplicatedID(false);
+    setIsAgreeRequired(false);
+    setIsError(false);
+  }
 
   // native 회원가입 핸들러
   const handleRegister = async (id: string, email: string, password: string) => {
     if (!agreed) {
-      // todo: 동의 스위치 하이라이트
+      setIsAgreeRequired(true);
+      setIsLoading(false);
       return;
     }
-    setIsLoading(true);
     const registerResult = await NativeRegister({ id: id, email: email, password: password });
-    if (registerResult) {
-      // todo: 가입 성공 화면 추가
+    if (registerResult.success) {
       const authResult = await NativeAuth({ id: id, password: password });
       login(authResult.jwt_token as string, authResult.id as string, "native");
       router.push('/');
-    } else {
-      console.error("Register Failed");
     }
-    setIsLoaded(true);
-  };
-
-  useEffect(() => {
+    else if (registerResult.status == 400) {
+      setIsDuplicatedID(true);
+    }
+    else{
+      setIsError(true);
+    }
     setIsLoading(false);
-  }, [isLoaded]);
+  };
 
   return (
     <div className="isolate bg-white px-16 py-20 pb-32 lg:px-20">
@@ -50,7 +58,13 @@ export default function Register() {
           AI-NES에 가입하여 더 편리한 서비스를 제공받으세요.
         </p>
       </div>
-      <form onSubmit={(event) => { event.preventDefault(); handleRegister(id, email, password) }} method="POST" className="mx-auto mt-8 max-w-xl">
+      <form method="POST" className="mx-auto mt-8 max-w-xl"
+        onSubmit={
+          (event) => {
+            event.preventDefault();
+            initState();
+            handleRegister(id, email, password);
+          }}>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <FloatingLabel
@@ -116,13 +130,23 @@ export default function Register() {
             type="submit"
             className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            <p className={isLoading ? 'hidden' : ''}>가입하기</p>
             {isLoading ?
               <div role="status" className="flex justify-center">
                 <Spinner color="purple" aria-label="loading.." size="md" />
               </div>
-              : ''}
+              : <p className={isLoading ? 'hidden' : ''}>가입하기</p>}
           </button>
+        </div>
+        <div className="text-pink-600 text-sm mt-1">
+          <p className={classNames(isDuplicatedID ? "" : "hidden")}>
+            이미 사용중인 아이디 입니다.
+          </p>
+          <p className={classNames(isAgreeRequired ? "" : "hidden")}>
+            개인정보 수집에 동의해주세요.
+          </p>
+          <p className={classNames(isError ? "" : "hidden")}>
+            회원가입에 실패했습니다.
+          </p>
         </div>
       </form>
     </div>

@@ -41,12 +41,11 @@ export default function Login() {
             default:
                 throw new Error('Unsupported authentication provider');
         }
-        if (authResult.status == 201) {
+        if (authResult.status == 201 && authResult.jwt_token) {
             login(authResult.jwt_token as string, authResult.id as string, authResult.provider as string);
             router.push('/');
         } else {
             setIsLoginFail(true);
-            if (authResult.error) console.error(authResult.error);
         }
         setIsLoaded(true);
     };
@@ -161,23 +160,25 @@ export default function Login() {
                             </button>
                             <button
                                 type="button"
-                                className="relative flex w-full h-10 mx-auto justify-center items-center rounded-md mt-2"
+                                className="mt-2 flex w-full justify-center rounded-lg bg-[#FEE500] px-3 py-2.5 text-sm font-semibold"
                                 disabled={isLoading}
                                 onClick={openKakaoLogin}
                             >
-                                <div className="relative w-full h-full flex justify-center items-center">
-                                    <Image src="/images/kakao_login_large_wide.png" alt="Kakao Login" layout="fill" objectFit="contain" />
+                                <div className="mr-2 flex justify-center items-center">
+                                    <img className="h-4" src="/images/kakao_logo.png" alt="Kakao Login"/>
                                 </div>
+                                <p className="text-black/85 leading-4">카카오 로그인</p>
                             </button>
                             <button
                                 type="button"
-                                className="relative flex w-full h-10 mx-auto justify-center items-center rounded-md mt-2"
+                                className="mt-2 flex w-full justify-center rounded-lg bg-white px-3 py-2.5 text-sm font-semibold shadow-md"
                                 disabled={isLoading}
                                 onClick={() => handleLogin('google')}
                             >
-                                <div className="relative w-full h-full flex justify-center items-center">
-                                    <Image src="/images/google_login_SI.png" alt="Google Login" layout="fill" objectFit="contain" />
+                                <div className="mr-2 flex justify-center items-center">
+                                    <img className="h-[18px]" src="/images/google_logo.png" alt="Google Login"/>
                                 </div>
+                                <p className="text-[#5f6368] leading-[18px] roboto-bold">구글 로그인</p>
                             </button>
                         </div>
                     </form>

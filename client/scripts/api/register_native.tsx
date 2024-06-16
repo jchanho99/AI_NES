@@ -1,21 +1,45 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
-interface RegitserRequest{
+interface RegitserRequest {
     id: string;
     email: string;
     password: string;
 }
 
-export default async function NativeRegister(regitserRequest: RegitserRequest): Promise<Boolean> {
-    try{
-        const response = await axios.post<Boolean>("/service/auth/signup", regitserRequest);
-		if(!response.data || response.status != 201){
-			console.log(response);
-		}
-        return response.data;
+interface RegisterResult {
+    success: boolean;
+    status: number;
+}
+
+export default async function NativeRegister(regitserRequest: RegitserRequest): Promise<RegisterResult> {
+    try {
+        const response = await axios.post("/service/auth/signup", regitserRequest);
+        if (response.data === true) {
+            return {
+                success: true,
+                status: response.status
+            };
+        }
+        else {
+            return {
+                success: false,
+                status: response.status
+            }
+        }
     }
-    catch(err){
+    catch (err) {
         console.error(err);
-        return false;
+        if (axios.isAxiosError(err)){
+            return {
+                success: false,
+                status: err.response?.status as number
+            };
+        }
+        else {
+            return {
+                success: false,
+                status: 500
+            };
+        }
     }
 }

@@ -46,7 +46,7 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ article }) => {
     }
 
     return (
-        <div className="mx-auto psm:static px-4 sm:px-6 lg:px-8 pt-4 sm:pt-24 lg:pt-16 pb-16 sm:pb-12 lg:pb-8">
+        <div className="mx-auto psm:static px-4 sm:px-6 lg:px-8 pt-8 sm:pt-24 lg:pt-16 pb-16 sm:pb-12 lg:pb-8">
             <div className="lg:items-center lg:justify-between">
                 <div className="min-w-0">
                     <div>
@@ -68,7 +68,7 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ article }) => {
                             {formatDateString(article.date as Date)}
                         </div>
                     </div>
-                    <div className="mt-2 flex flex-col sm:mt-2 sm:flex-row sm:flex-wrap sm:space-x-3 justify-end">
+                    <div className="mt-2 gap-x-2 flex justify-end">
                         <div>
                             <button
                                 type="button"

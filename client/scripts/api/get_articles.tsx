@@ -32,12 +32,21 @@ async function GetArticle(date: Date, index: number): Promise<GetArticleResult> 
 
         const getArticleResult = { status: response.status, item: response.data };
         // Debug
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // await new Promise((resolve) => setTimeout(resolve, 2000));
 
         return getArticleResult;
     } catch (err) {
         console.error(err);
-        return { status: 500 };
+        if (axios.isAxiosError(err)) {
+            return {
+                status: err.response?.status as number
+            };
+        }
+        else {
+            return {
+                status: 500
+            };
+        }
     }
 }
 
@@ -56,12 +65,21 @@ async function GetArticles(date?: Date): Promise<GetArticlesResult> {
         }
         const getArticlesResult = { status: response.status, items: response.data };
         // Debug
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // await new Promise((resolve) => setTimeout(resolve, 2000));
 
         return getArticlesResult;
     } catch (err) {
         console.error(err);
-        return { status: 500 };
+        if (axios.isAxiosError(err)) {
+            return {
+                status: err.response?.status as number
+            };
+        }
+        else {
+            return {
+                status: 500
+            };
+        }
     }
 }
 

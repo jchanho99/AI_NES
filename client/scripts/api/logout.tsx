@@ -16,7 +16,9 @@ async function KakaoLogout(token: string): Promise<string> {
     }
 }
 
-// native logout api 아직 명세되지 않아 오류 발생
+// native logout
+// 백엔드에서 별도의 처리가 필요 없을 것으로 예상되어 사용하지 않음
+/*
 async function NativeLogout(id: string): Promise<Boolean> {
     try {
         const storage = JSON.parse(window.localStorage.authStorage);
@@ -29,5 +31,6 @@ async function NativeLogout(id: string): Promise<Boolean> {
         return false;
     }
 }
+    */
 
-export { KakaoLogout, NativeLogout };
+export { KakaoLogout };

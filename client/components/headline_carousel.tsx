@@ -3,9 +3,9 @@ import { Carousel, CustomFlowbiteTheme } from "flowbite-react";
 const articleTheme: CustomFlowbiteTheme["carousel"] =
 {
     "root": {
-        "base": "px-12 bg-gray-100 relative h-full w-full rounded-xl",
-        "leftControl": "absolute left-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none",
-        "rightControl": "absolute right-0 top-0 flex h-full items-center justify-center px-4 focus:outline-none"
+        "base": "px-4 lg:px-12 bg-gray-100 relative h-full w-full rounded-xl",
+        "leftControl": "absolute left-0 top-0 flex h-full items-center justify-center px-1 lg:px-4 focus:outline-none",
+        "rightControl": "absolute right-0 top-0 flex h-full items-center justify-center px-1 lg:px-4 focus:outline-none"
     },
     "indicators": {
         "active": {
@@ -23,8 +23,8 @@ const articleTheme: CustomFlowbiteTheme["carousel"] =
         }
     },
     "control": {
-        "base": "inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:outline-none group-focus:ring-4 group-focus:ring-gray-800/70 sm:h-10 sm:w-10",
-        "icon": "h-5 w-5 text-gray-500 sm:h-6 sm:w-6"
+        "base": "inline-flex w-6 h-6 lg:w-8 lg:h-8 items-center justify-center rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:outline-none group-focus:ring-4 group-focus:ring-gray-800/70",
+        "icon": "w-5 h-5 text-gray-500"
     },
     "scrollContainer": {
         "base": "flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-lg",

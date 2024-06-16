@@ -23,7 +23,7 @@ export default function SingleArticle() {
         }
         else {
             if (!getArticleResult.item) {
-                // todo: 해당 기사가 없을 경우 에러 처리
+                console.error("empty result");
             }
             else {
                 setArticle(getArticleResult.item);

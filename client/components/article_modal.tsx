@@ -41,7 +41,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, open, setOpen }) =
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
-                <div className="absolute right-0 top-0 p-4">
+                <div className="absolute right-0 top-0 p-2 lg:p-4">
                   <button
                     type="button"
                     className="rounded-md text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-white"
