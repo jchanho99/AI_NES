@@ -24,7 +24,7 @@ export default function Headline() {
     // 기사 정보 불러오기
     const handleGetArticles = async () => {
         const getArticleResult = await GetArticles();
-        if (getArticleResult.status != 201) {
+        if (getArticleResult.status == 500) {
             console.error(getArticleResult.status);
             setIsError(true);
         }
