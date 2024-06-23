@@ -6,7 +6,7 @@
 
 <img src="https://img.shields.io/badge/VScode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">: 코드 에디터
 
-<img src="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/pandas-3776AB?style=for-the-badge&logo=pandas&logoColor=white"> <img src="https://img.shields.io/badge/Tensorflow-FF8C00?style=for-the-badge&logo=Tensorflow&logoColor=white">  <img src="https://img.shields.io/badge/scikit--learn-FF8C00?style=for-the-badge&logo=scikit-learn&logoColor=white">: 사용 언어 및 라이브러리
+<img src="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/pandas-3776AB?style=for-the-badge&logo=pandas&logoColor=white"> <img src="https://img.shields.io/badge/Transformers-000000?style=for-the-badge&logoColor=white">  <img src="https://img.shields.io/badge/googletrans-FF8C00?style=for-the-badge&logoColor=white">: 사용 언어 및 라이브러리
 
 <img src="https://img.shields.io/badge/azure-61DAFB?style=for-the-badge&logo=azure&logoColor=white">: 클라우드 VM 서버
 
